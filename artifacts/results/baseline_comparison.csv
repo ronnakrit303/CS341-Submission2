@@ -1,0 +1,5 @@
+taxi_type,baseline_valid_count,pipeline_valid_count,difference
+High Volume FHV,120864668,120864668,0
+Yellow,20331754,20331754,0
+FHV,8119228,8119228,0
+Green,339801,339801,0

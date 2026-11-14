@@ -1,0 +1,52 @@
+{"at_utc": "2026-11-14T23:22:40+00:00", "stage": "START", "message": "Run 20261114T232240Z-e414d3e2: 2024-01 to 2024-06"}
+{"at_utc": "2026-11-14T23:22:40+00:00", "stage": "LOOKUP", "message": "Validated 265 unique taxi zones", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:40+00:00", "stage": "INPUT", "message": "[1/24] yellow_tripdata_2024-01.parquet"}
+{"at_utc": "2026-11-14T23:22:40+00:00", "stage": "TRANSFORM", "message": "reused: 2,964,624 raw -> 2,964,553 valid", "source_file": "yellow_tripdata_2024-01.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:40+00:00", "stage": "INPUT", "message": "[2/24] yellow_tripdata_2024-02.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 3,007,526 raw -> 3,007,517 valid", "source_file": "yellow_tripdata_2024-02.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[3/24] yellow_tripdata_2024-03.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 3,582,628 raw -> 3,582,509 valid", "source_file": "yellow_tripdata_2024-03.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[4/24] yellow_tripdata_2024-04.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 3,514,289 raw -> 3,514,215 valid", "source_file": "yellow_tripdata_2024-04.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[5/24] yellow_tripdata_2024-05.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 3,723,833 raw -> 3,723,784 valid", "source_file": "yellow_tripdata_2024-05.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[6/24] yellow_tripdata_2024-06.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 3,539,193 raw -> 3,539,176 valid", "source_file": "yellow_tripdata_2024-06.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[7/24] green_tripdata_2024-01.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 56,551 raw -> 56,549 valid", "source_file": "green_tripdata_2024-01.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[8/24] green_tripdata_2024-02.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 53,577 raw -> 53,577 valid", "source_file": "green_tripdata_2024-02.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[9/24] green_tripdata_2024-03.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 57,457 raw -> 57,455 valid", "source_file": "green_tripdata_2024-03.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[10/24] green_tripdata_2024-04.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 56,471 raw -> 56,471 valid", "source_file": "green_tripdata_2024-04.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[11/24] green_tripdata_2024-05.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 61,003 raw -> 61,001 valid", "source_file": "green_tripdata_2024-05.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[12/24] green_tripdata_2024-06.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 54,748 raw -> 54,748 valid", "source_file": "green_tripdata_2024-06.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[13/24] fhv_tripdata_2024-01.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 1,290,116 raw -> 1,290,116 valid", "source_file": "fhv_tripdata_2024-01.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[14/24] fhv_tripdata_2024-02.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 1,176,093 raw -> 1,176,093 valid", "source_file": "fhv_tripdata_2024-02.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[15/24] fhv_tripdata_2024-03.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 1,469,352 raw -> 1,469,352 valid", "source_file": "fhv_tripdata_2024-03.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[16/24] fhv_tripdata_2024-04.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 1,444,626 raw -> 1,444,626 valid", "source_file": "fhv_tripdata_2024-04.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[17/24] fhv_tripdata_2024-05.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 1,352,502 raw -> 1,352,502 valid", "source_file": "fhv_tripdata_2024-05.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[18/24] fhv_tripdata_2024-06.parquet"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "TRANSFORM", "message": "reused: 1,386,539 raw -> 1,386,539 valid", "source_file": "fhv_tripdata_2024-06.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:41+00:00", "stage": "INPUT", "message": "[19/24] fhvhv_tripdata_2024-01.parquet"}
+{"at_utc": "2026-11-14T23:22:42+00:00", "stage": "TRANSFORM", "message": "reused: 19,663,930 raw -> 19,663,930 valid", "source_file": "fhvhv_tripdata_2024-01.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:42+00:00", "stage": "INPUT", "message": "[20/24] fhvhv_tripdata_2024-02.parquet"}
+{"at_utc": "2026-11-14T23:22:42+00:00", "stage": "TRANSFORM", "message": "reused: 19,359,148 raw -> 19,359,148 valid", "source_file": "fhvhv_tripdata_2024-02.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:42+00:00", "stage": "INPUT", "message": "[21/24] fhvhv_tripdata_2024-03.parquet"}
+{"at_utc": "2026-11-14T23:22:42+00:00", "stage": "TRANSFORM", "message": "reused: 21,280,788 raw -> 21,280,788 valid", "source_file": "fhvhv_tripdata_2024-03.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:42+00:00", "stage": "INPUT", "message": "[22/24] fhvhv_tripdata_2024-04.parquet"}
+{"at_utc": "2026-11-14T23:22:43+00:00", "stage": "TRANSFORM", "message": "reused: 19,733,038 raw -> 19,733,038 valid", "source_file": "fhvhv_tripdata_2024-04.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:43+00:00", "stage": "INPUT", "message": "[23/24] fhvhv_tripdata_2024-05.parquet"}
+{"at_utc": "2026-11-14T23:22:43+00:00", "stage": "TRANSFORM", "message": "reused: 20,704,538 raw -> 20,704,538 valid", "source_file": "fhvhv_tripdata_2024-05.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:43+00:00", "stage": "INPUT", "message": "[24/24] fhvhv_tripdata_2024-06.parquet"}
+{"at_utc": "2026-11-14T23:22:44+00:00", "stage": "TRANSFORM", "message": "reused: 20,123,226 raw -> 20,123,226 valid", "source_file": "fhvhv_tripdata_2024-06.parquet", "download_action": "cached_verified"}
+{"at_utc": "2026-11-14T23:22:44+00:00", "stage": "QUALITY", "message": "PASS: 10 gates; 149,655,451 valid records; 345 rejected"}
+{"at_utc": "2026-11-14T23:22:44+00:00", "stage": "SUCCESS", "message": "Winner(s): High Volume FHV; curated rows: 153,662"}

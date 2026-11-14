@@ -1,0 +1,18 @@
+flowchart TD
+    config["JSON config: months and source mappings"] --> manifest["Manifest: four taxi types by month"]
+    trips["TLC Trip Records: Parquet"] --> download["Download to .part, retry, SHA-256, atomic replace"]
+    zones["TLC Taxi Zone Lookup: CSV"] --> lookup["Validate schema and unique LocationID"]
+    manifest --> download
+    download --> raw["Local raw snapshot and source metadata"]
+    raw --> validate["Required schema and time-rule audit"]
+    validate --> cache["Content-keyed daily aggregate partitions"]
+    cache --> join["LEFT JOIN pickup zone and preserve unknowns"]
+    lookup --> join
+    join --> curated["Curated daily pickup-zone counts: Parquet"]
+    curated --> quality["Quality gates and count reconciliation"]
+    quality --> analysis["Ranking, monthly counts, borough counts and chart"]
+    analysis --> success["SUCCESS run and atomic latest pointer"]
+    validate --> failed["FAILED run, error evidence, previous success retained"]
+    lookup --> failed
+    quality --> failed
+    success --> evidence["Export verified outputs and two-run evidence to GitHub"]

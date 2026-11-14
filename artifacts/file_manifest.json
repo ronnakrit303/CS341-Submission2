@@ -1,0 +1,119 @@
+{
+  "files": [
+    {
+      "path": "curated/daily_zone_counts.parquet",
+      "bytes": 364118,
+      "sha256": "64c8164b367b6aabcd143f98d1d0eaffbd465c93391933f823101bb3c8bd4ef2"
+    },
+    {
+      "path": "curated/sample_daily_zone_counts.csv",
+      "bytes": 21115,
+      "sha256": "2a3582a139d4f00c329956df8edfe57ee4a8f27afb73c5340d3f9bcbe835859b"
+    },
+    {
+      "path": "provenance/baseline_notebook.json",
+      "bytes": 231,
+      "sha256": "7dde1773c04759c0bd6748a996dcf76a6c6f47224fca955bd8c2fc825f54c4a1"
+    },
+    {
+      "path": "provenance/effective_config.json",
+      "bytes": 1570,
+      "sha256": "c7db9d1405c40cffcd283954665ef464cae2e84c2bb35f83b41b9c868936daf3"
+    },
+    {
+      "path": "provenance/manifest.json",
+      "bytes": 14021,
+      "sha256": "97c28f8cb2e4d4062d65648c1c4bc566a7059b86fb1f2de22578ac92105731d6"
+    },
+    {
+      "path": "quality/file_audit.csv",
+      "bytes": 4810,
+      "sha256": "032bc16b2bc838881a38710443b98007c8b79f452e71752ef2ae0511b5bae6bb"
+    },
+    {
+      "path": "quality/file_audit.json",
+      "bytes": 17951,
+      "sha256": "ed3de9fc2938b2222b68949403911d2c14bf1c8a4651cb73c2e8f802fd50981d"
+    },
+    {
+      "path": "quality/quality.json",
+      "bytes": 2064,
+      "sha256": "d8a1a903b7b0d2795b1885d168dc22de5d8cad7198c7e7c0ee11bbf9e9175c3f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1048,
+      "sha256": "97931e6a1a876bc41cda2639bc95a573e942ab1ba834e1c7df7280d166e1a034"
+    },
+    {
+      "path": "reproducibility.json",
+      "bytes": 543,
+      "sha256": "7a44d28d5d6aca6187e5169e9cd40f2ec3803d79778a07d4f8d14946be2be399"
+    },
+    {
+      "path": "results/analysis.md",
+      "bytes": 867,
+      "sha256": "a29aac2e044d270ca8d94ee9a3619eded8f80c801b6e76f61453353678f5c3ed"
+    },
+    {
+      "path": "results/answer.json",
+      "bytes": 277,
+      "sha256": "0a63a2816365889e7e51ea84ce9b5fdc98032a568917dca7dbcbc6790016a17d"
+    },
+    {
+      "path": "results/baseline_comparison.csv",
+      "bytes": 177,
+      "sha256": "ac99c1043ac56949f73f75b2682b2cc97a37c79fab1ebe35bc5bcbd4343a177f"
+    },
+    {
+      "path": "results/borough_counts.csv",
+      "bytes": 744,
+      "sha256": "c9cd1cd85fc140a3884301cd6c2ae2364b7ebc1a0acdd203ff59efa11538dba9"
+    },
+    {
+      "path": "results/monthly_counts.csv",
+      "bytes": 636,
+      "sha256": "32b2675e5604c987a77124f2334404c43c8223c317024d5c75022e24c0792125"
+    },
+    {
+      "path": "results/ranking.csv",
+      "bytes": 350,
+      "sha256": "d8ac80f0ba93c43caf4c3b82490bcae159ecd6e9443dffd6c159ddda4208fc48"
+    },
+    {
+      "path": "results/source_month_counts.csv",
+      "bytes": 900,
+      "sha256": "212cb7601452ee9bcb707ae3fc5f84bb4b82ed01570105f045ac771c6aad2834"
+    },
+    {
+      "path": "results/taxi_usage.png",
+      "bytes": 39901,
+      "sha256": "59ead9970f67bafde6f7714fc96146df42700d835ad3bdff632bc99f34961c0d"
+    },
+    {
+      "path": "runs/20261114T232013Z-397fd2b3/events.jsonl",
+      "bytes": 8033,
+      "sha256": "1e2e62ea35567b19f88e8417afc109c11355e26c602b9bdc71b1fd8c7d5a6f5c"
+    },
+    {
+      "path": "runs/20261114T232013Z-397fd2b3/run.json",
+      "bytes": 3486,
+      "sha256": "bbdd260a2964cc877600736c36c35963c8bab20fff288371493d086b06d7feb1"
+    },
+    {
+      "path": "runs/20261114T232240Z-e414d3e2/events.jsonl",
+      "bytes": 8086,
+      "sha256": "e57218f0529c2222a717cf37e12c8c275f200c7acfbfbee420314eda80accf98"
+    },
+    {
+      "path": "runs/20261114T232240Z-e414d3e2/run.json",
+      "bytes": 3486,
+      "sha256": "00214806a9a1367564bbe43180e1ae2d8a7883905632f92704985a3958494ef1"
+    },
+    {
+      "path": "tests.xml",
+      "bytes": 2424,
+      "sha256": "9d798fd5e869ae5e1de244d6ca4aae8b1e71ed70a27aa8ce5b70ebe363aef42f"
+    }
+  ]
+}

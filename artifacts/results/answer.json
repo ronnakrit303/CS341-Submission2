@@ -1,0 +1,11 @@
+{
+  "period": "2024-01 to 2024-06",
+  "answers_original_question": true,
+  "metric": "valid trip-record count",
+  "winners": [
+    "High Volume FHV"
+  ],
+  "winner_valid_count": 120864668,
+  "total_valid_count": 149655451,
+  "winner_changed_after_cleaning": false
+}

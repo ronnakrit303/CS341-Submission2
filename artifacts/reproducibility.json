@@ -1,0 +1,17 @@
+{
+  "first_run": "20261114T232013Z-397fd2b3",
+  "unchanged_rerun": "20261114T232240Z-e414d3e2",
+  "same_counts_and_curated_content": true,
+  "first_run_actions": {
+    "processed": 24,
+    "downloaded": 24
+  },
+  "rerun_actions": {
+    "reused": 24,
+    "cached_verified": 24
+  },
+  "curated_content_sha256": "bb69c5a4bfa6bd04121438de241f1db103f4f737c529377255818451dd20c769",
+  "first_elapsed_seconds": 118.43,
+  "rerun_elapsed_seconds": 3.978,
+  "scope": "Actual configured sources; no synthetic fixture records included"
+}

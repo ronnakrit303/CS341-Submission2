@@ -1,0 +1,12 @@
+{
+  "provenance": "Saved outputs of 6709650607_Submission_1_CS341.ipynb; used only for comparison, never to generate the pipeline answer",
+  "period": "2024-01 to 2024-06",
+  "metric": "valid trip-record count",
+  "valid_counts": {
+    "High Volume FHV": 120864668,
+    "Yellow": 20331754,
+    "FHV": 8119228,
+    "Green": 339801
+  },
+  "invalid_count": 345
+}

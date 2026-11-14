@@ -1,0 +1,53 @@
+{
+  "start_month": "2024-01",
+  "end_month": "2024-06",
+  "trip_base_url": "https://d37ci6vzurychx.cloudfront.net/trip-data",
+  "zone_lookup_url": "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv",
+  "data_dir": "data",
+  "reports_dir": "reports",
+  "memory_limit": "2GB",
+  "threads": 2,
+  "download_attempts": 3,
+  "taxi_types": {
+    "Yellow": {
+      "prefix": "yellow",
+      "pickup": "tpep_pickup_datetime",
+      "dropoff": "tpep_dropoff_datetime",
+      "pu_location": "PULocationID",
+      "do_location": "DOLocationID",
+      "distance": "trip_distance",
+      "fare": "fare_amount",
+      "passenger": "passenger_count"
+    },
+    "Green": {
+      "prefix": "green",
+      "pickup": "lpep_pickup_datetime",
+      "dropoff": "lpep_dropoff_datetime",
+      "pu_location": "PULocationID",
+      "do_location": "DOLocationID",
+      "distance": "trip_distance",
+      "fare": "fare_amount",
+      "passenger": "passenger_count"
+    },
+    "FHV": {
+      "prefix": "fhv",
+      "pickup": "pickup_datetime",
+      "dropoff": "dropOff_datetime",
+      "pu_location": "PUlocationID",
+      "do_location": "DOlocationID",
+      "distance": null,
+      "fare": null,
+      "passenger": null
+    },
+    "High Volume FHV": {
+      "prefix": "fhvhv",
+      "pickup": "pickup_datetime",
+      "dropoff": "dropoff_datetime",
+      "pu_location": "PULocationID",
+      "do_location": "DOLocationID",
+      "distance": "trip_miles",
+      "fare": "base_passenger_fare",
+      "passenger": null
+    }
+  }
+}

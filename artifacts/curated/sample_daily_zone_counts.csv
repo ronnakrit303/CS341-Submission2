@@ -1,0 +1,201 @@
+pickup_date,taxi_type,pickup_location_id,borough,zone,service_zone,zone_match_status,source_month,source_file,trip_count
+2024-01-01,FHV,1,EWR,Newark Airport,EWR,matched,2024-01,fhv_tripdata_2024-01.parquet,26
+2024-01-01,FHV,3,Bronx,Allerton/Pelham Gardens,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,5
+2024-01-01,FHV,4,Manhattan,Alphabet City,Yellow Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,2
+2024-01-01,FHV,5,Staten Island,Arden Heights,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,9
+2024-01-01,FHV,6,Staten Island,Arrochar/Fort Wadsworth,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,22
+2024-01-01,FHV,7,Queens,Astoria,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,35
+2024-01-01,FHV,9,Queens,Auburndale,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,8
+2024-01-01,FHV,10,Queens,Baisley Park,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,7
+2024-01-01,FHV,11,Brooklyn,Bath Beach,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,4
+2024-01-01,FHV,13,Manhattan,Battery Park City,Yellow Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,1
+2024-01-01,FHV,14,Brooklyn,Bay Ridge,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,4
+2024-01-01,FHV,15,Queens,Bay Terrace/Fort Totten,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,4
+2024-01-01,FHV,16,Queens,Bayside,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,8
+2024-01-01,FHV,17,Brooklyn,Bedford,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,9
+2024-01-01,FHV,18,Bronx,Bedford Park,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,5
+2024-01-01,FHV,19,Queens,Bellerose,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,3
+2024-01-01,FHV,20,Bronx,Belmont,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,3
+2024-01-01,FHV,21,Brooklyn,Bensonhurst East,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,9
+2024-01-01,FHV,22,Brooklyn,Bensonhurst West,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,10
+2024-01-01,FHV,23,Staten Island,Bloomfield/Emerson Hill,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,35
+2024-01-01,FHV,24,Manhattan,Bloomingdale,Yellow Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,2
+2024-01-01,FHV,25,Brooklyn,Boerum Hill,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,9
+2024-01-01,FHV,26,Brooklyn,Borough Park,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,8
+2024-01-01,FHV,28,Queens,Briarwood/Jamaica Hills,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,5
+2024-01-01,FHV,29,Brooklyn,Brighton Beach,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,43
+2024-01-01,FHV,31,Bronx,Bronx Park,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,2
+2024-01-01,FHV,32,Bronx,Bronxdale,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,10
+2024-01-01,FHV,33,Brooklyn,Brooklyn Heights,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,4
+2024-01-01,FHV,35,Brooklyn,Brownsville,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,4
+2024-01-01,FHV,36,Brooklyn,Bushwick North,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,7
+2024-01-01,FHV,37,Brooklyn,Bushwick South,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,14
+2024-01-01,FHV,38,Queens,Cambria Heights,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,1
+2024-01-01,FHV,39,Brooklyn,Canarsie,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,12
+2024-01-01,FHV,40,Brooklyn,Carroll Gardens,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,2
+2024-01-01,FHV,41,Manhattan,Central Harlem,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,4
+2024-01-01,FHV,42,Manhattan,Central Harlem North,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,8
+2024-01-01,FHV,43,Manhattan,Central Park,Yellow Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,3
+2024-01-01,FHV,44,Staten Island,Charleston/Tottenville,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,16
+2024-01-01,FHV,45,Manhattan,Chinatown,Yellow Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,1
+2024-01-01,FHV,47,Bronx,Claremont/Bathgate,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,4
+2024-01-01,FHV,48,Manhattan,Clinton East,Yellow Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,4
+2024-01-01,FHV,49,Brooklyn,Clinton Hill,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,8
+2024-01-01,FHV,50,Manhattan,Clinton West,Yellow Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,2
+2024-01-01,FHV,51,Bronx,Co-Op City,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,19
+2024-01-01,FHV,52,Brooklyn,Cobble Hill,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,2
+2024-01-01,FHV,53,Queens,College Point,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,12
+2024-01-01,FHV,55,Brooklyn,Coney Island,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,36
+2024-01-01,FHV,56,Queens,Corona,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,179
+2024-01-01,FHV,57,Queens,Corona,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,6
+2024-01-01,FHV,60,Bronx,Crotona Park East,Boro Zone,matched,2024-01,fhv_tripdata_2024-01.parquet,4
+2024-01-01,Green,7,Queens,Astoria,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,45
+2024-01-01,Green,10,Queens,Baisley Park,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,16,Queens,Bayside,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,17,Brooklyn,Bedford,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,2
+2024-01-01,Green,24,Manhattan,Bloomingdale,Yellow Zone,matched,2024-01,green_tripdata_2024-01.parquet,5
+2024-01-01,Green,25,Brooklyn,Boerum Hill,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,20
+2024-01-01,Green,26,Brooklyn,Borough Park,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,33,Brooklyn,Brooklyn Heights,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,13
+2024-01-01,Green,34,Brooklyn,Brooklyn Navy Yard,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,2
+2024-01-01,Green,36,Brooklyn,Bushwick North,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,8
+2024-01-01,Green,37,Brooklyn,Bushwick South,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,4
+2024-01-01,Green,40,Brooklyn,Carroll Gardens,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,41,Manhattan,Central Harlem,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,77
+2024-01-01,Green,42,Manhattan,Central Harlem North,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,31
+2024-01-01,Green,43,Manhattan,Central Park,Yellow Zone,matched,2024-01,green_tripdata_2024-01.parquet,10
+2024-01-01,Green,47,Bronx,Claremont/Bathgate,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,3
+2024-01-01,Green,49,Brooklyn,Clinton Hill,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,3
+2024-01-01,Green,51,Bronx,Co-Op City,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,52,Brooklyn,Cobble Hill,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,7
+2024-01-01,Green,55,Brooklyn,Coney Island,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,5
+2024-01-01,Green,56,Queens,Corona,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,57,Queens,Corona,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,61,Brooklyn,Crown Heights North,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,6
+2024-01-01,Green,65,Brooklyn,Downtown Brooklyn/MetroTech,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,26
+2024-01-01,Green,66,Brooklyn,DUMBO/Vinegar Hill,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,37
+2024-01-01,Green,70,Queens,East Elmhurst,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,2
+2024-01-01,Green,74,Manhattan,East Harlem North,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,348
+2024-01-01,Green,75,Manhattan,East Harlem South,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,80
+2024-01-01,Green,76,Brooklyn,East New York,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,80,Brooklyn,East Williamsburg,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,17
+2024-01-01,Green,82,Queens,Elmhurst,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,44
+2024-01-01,Green,83,Queens,Elmhurst/Maspeth,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,12
+2024-01-01,Green,85,Brooklyn,Erasmus,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,89,Brooklyn,Flatbush/Ditmas Park,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,92,Queens,Flushing,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,10
+2024-01-01,Green,93,Queens,Flushing Meadows-Corona Park,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,2
+2024-01-01,Green,94,Bronx,Fordham South,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,95,Queens,Forest Hills,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,43
+2024-01-01,Green,97,Brooklyn,Fort Greene,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,16
+2024-01-01,Green,102,Queens,Glendale,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,112,Brooklyn,Greenpoint,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,8
+2024-01-01,Green,116,Manhattan,Hamilton Heights,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,7
+2024-01-01,Green,119,Bronx,Highbridge,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,121,Queens,Hillcrest/Pomonok,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,123,Brooklyn,Homecrest,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,127,Manhattan,Inwood,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,Green,129,Queens,Jackson Heights,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,41
+2024-01-01,Green,130,Queens,Jamaica,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,34
+2024-01-01,Green,134,Queens,Kew Gardens,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,9
+2024-01-01,Green,135,Queens,Kew Gardens Hills,Boro Zone,matched,2024-01,green_tripdata_2024-01.parquet,1
+2024-01-01,High Volume FHV,2,Queens,Jamaica Bay,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1
+2024-01-01,High Volume FHV,3,Bronx,Allerton/Pelham Gardens,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1221
+2024-01-01,High Volume FHV,4,Manhattan,Alphabet City,Yellow Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,2266
+2024-01-01,High Volume FHV,5,Staten Island,Arden Heights,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,172
+2024-01-01,High Volume FHV,6,Staten Island,Arrochar/Fort Wadsworth,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,291
+2024-01-01,High Volume FHV,7,Queens,Astoria,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,7755
+2024-01-01,High Volume FHV,8,Queens,Astoria Park,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,23
+2024-01-01,High Volume FHV,9,Queens,Auburndale,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,456
+2024-01-01,High Volume FHV,10,Queens,Baisley Park,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1951
+2024-01-01,High Volume FHV,11,Brooklyn,Bath Beach,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,780
+2024-01-01,High Volume FHV,12,Manhattan,Battery Park,Yellow Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,123
+2024-01-01,High Volume FHV,13,Manhattan,Battery Park City,Yellow Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1471
+2024-01-01,High Volume FHV,14,Brooklyn,Bay Ridge,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,3472
+2024-01-01,High Volume FHV,15,Queens,Bay Terrace/Fort Totten,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,424
+2024-01-01,High Volume FHV,16,Queens,Bayside,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1254
+2024-01-01,High Volume FHV,17,Brooklyn,Bedford,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,6709
+2024-01-01,High Volume FHV,18,Bronx,Bedford Park,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,3484
+2024-01-01,High Volume FHV,19,Queens,Bellerose,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,511
+2024-01-01,High Volume FHV,20,Bronx,Belmont,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1537
+2024-01-01,High Volume FHV,21,Brooklyn,Bensonhurst East,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1658
+2024-01-01,High Volume FHV,22,Brooklyn,Bensonhurst West,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,2168
+2024-01-01,High Volume FHV,23,Staten Island,Bloomfield/Emerson Hill,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,613
+2024-01-01,High Volume FHV,24,Manhattan,Bloomingdale,Yellow Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,839
+2024-01-01,High Volume FHV,25,Brooklyn,Boerum Hill,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,3919
+2024-01-01,High Volume FHV,26,Brooklyn,Borough Park,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,3178
+2024-01-01,High Volume FHV,27,Queens,Breezy Point/Fort Tilden/Riis Beach,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,61
+2024-01-01,High Volume FHV,28,Queens,Briarwood/Jamaica Hills,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1440
+2024-01-01,High Volume FHV,29,Brooklyn,Brighton Beach,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1233
+2024-01-01,High Volume FHV,30,Queens,Broad Channel,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,82
+2024-01-01,High Volume FHV,31,Bronx,Bronx Park,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,204
+2024-01-01,High Volume FHV,32,Bronx,Bronxdale,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1607
+2024-01-01,High Volume FHV,33,Brooklyn,Brooklyn Heights,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,2435
+2024-01-01,High Volume FHV,34,Brooklyn,Brooklyn Navy Yard,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1024
+2024-01-01,High Volume FHV,35,Brooklyn,Brownsville,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,3530
+2024-01-01,High Volume FHV,36,Brooklyn,Bushwick North,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,8612
+2024-01-01,High Volume FHV,37,Brooklyn,Bushwick South,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,11135
+2024-01-01,High Volume FHV,38,Queens,Cambria Heights,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,586
+2024-01-01,High Volume FHV,39,Brooklyn,Canarsie,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,4296
+2024-01-01,High Volume FHV,40,Brooklyn,Carroll Gardens,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1275
+2024-01-01,High Volume FHV,41,Manhattan,Central Harlem,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,3935
+2024-01-01,High Volume FHV,42,Manhattan,Central Harlem North,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,5583
+2024-01-01,High Volume FHV,43,Manhattan,Central Park,Yellow Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,977
+2024-01-01,High Volume FHV,44,Staten Island,Charleston/Tottenville,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,346
+2024-01-01,High Volume FHV,45,Manhattan,Chinatown,Yellow Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,1820
+2024-01-01,High Volume FHV,46,Bronx,City Island,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,126
+2024-01-01,High Volume FHV,47,Bronx,Claremont/Bathgate,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,2138
+2024-01-01,High Volume FHV,48,Manhattan,Clinton East,Yellow Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,6749
+2024-01-01,High Volume FHV,49,Brooklyn,Clinton Hill,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,4266
+2024-01-01,High Volume FHV,50,Manhattan,Clinton West,Yellow Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,4013
+2024-01-01,High Volume FHV,51,Bronx,Co-Op City,Boro Zone,matched,2024-01,fhvhv_tripdata_2024-01.parquet,2040
+2024-01-01,Yellow,1,EWR,Newark Airport,EWR,matched,2024-01,yellow_tripdata_2024-01.parquet,21
+2024-01-01,Yellow,3,Bronx,Allerton/Pelham Gardens,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,1
+2024-01-01,Yellow,4,Manhattan,Alphabet City,Yellow Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,207
+2024-01-01,Yellow,6,Staten Island,Arrochar/Fort Wadsworth,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,2
+2024-01-01,Yellow,7,Queens,Astoria,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,177
+2024-01-01,Yellow,9,Queens,Auburndale,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,4
+2024-01-01,Yellow,10,Queens,Baisley Park,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,44
+2024-01-01,Yellow,12,Manhattan,Battery Park,Yellow Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,73
+2024-01-01,Yellow,13,Manhattan,Battery Park City,Yellow Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,336
+2024-01-01,Yellow,14,Brooklyn,Bay Ridge,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,17
+2024-01-01,Yellow,15,Queens,Bay Terrace/Fort Totten,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,2
+2024-01-01,Yellow,16,Queens,Bayside,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,5
+2024-01-01,Yellow,17,Brooklyn,Bedford,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,52
+2024-01-01,Yellow,18,Bronx,Bedford Park,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,5
+2024-01-01,Yellow,19,Queens,Bellerose,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,8
+2024-01-01,Yellow,20,Bronx,Belmont,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,7
+2024-01-01,Yellow,21,Brooklyn,Bensonhurst East,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,5
+2024-01-01,Yellow,22,Brooklyn,Bensonhurst West,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,4
+2024-01-01,Yellow,24,Manhattan,Bloomingdale,Yellow Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,196
+2024-01-01,Yellow,25,Brooklyn,Boerum Hill,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,70
+2024-01-01,Yellow,26,Brooklyn,Borough Park,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,4
+2024-01-01,Yellow,28,Queens,Briarwood/Jamaica Hills,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,16
+2024-01-01,Yellow,29,Brooklyn,Brighton Beach,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,1
+2024-01-01,Yellow,32,Bronx,Bronxdale,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,5
+2024-01-01,Yellow,33,Brooklyn,Brooklyn Heights,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,60
+2024-01-01,Yellow,34,Brooklyn,Brooklyn Navy Yard,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,6
+2024-01-01,Yellow,35,Brooklyn,Brownsville,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,10
+2024-01-01,Yellow,36,Brooklyn,Bushwick North,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,77
+2024-01-01,Yellow,37,Brooklyn,Bushwick South,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,85
+2024-01-01,Yellow,38,Queens,Cambria Heights,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,2
+2024-01-01,Yellow,39,Brooklyn,Canarsie,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,14
+2024-01-01,Yellow,40,Brooklyn,Carroll Gardens,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,22
+2024-01-01,Yellow,41,Manhattan,Central Harlem,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,264
+2024-01-01,Yellow,42,Manhattan,Central Harlem North,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,170
+2024-01-01,Yellow,43,Manhattan,Central Park,Yellow Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,1088
+2024-01-01,Yellow,45,Manhattan,Chinatown,Yellow Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,173
+2024-01-01,Yellow,47,Bronx,Claremont/Bathgate,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,10
+2024-01-01,Yellow,48,Manhattan,Clinton East,Yellow Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,2565
+2024-01-01,Yellow,49,Brooklyn,Clinton Hill,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,44
+2024-01-01,Yellow,50,Manhattan,Clinton West,Yellow Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,754
+2024-01-01,Yellow,51,Bronx,Co-Op City,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,4
+2024-01-01,Yellow,52,Brooklyn,Cobble Hill,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,11
+2024-01-01,Yellow,53,Queens,College Point,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,2
+2024-01-01,Yellow,55,Brooklyn,Coney Island,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,7
+2024-01-01,Yellow,56,Queens,Corona,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,16
+2024-01-01,Yellow,57,Queens,Corona,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,1
+2024-01-01,Yellow,60,Bronx,Crotona Park East,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,5
+2024-01-01,Yellow,61,Brooklyn,Crown Heights North,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,48
+2024-01-01,Yellow,62,Brooklyn,Crown Heights South,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,7
+2024-01-01,Yellow,63,Brooklyn,Cypress Hills,Boro Zone,matched,2024-01,yellow_tripdata_2024-01.parquet,15

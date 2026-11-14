@@ -1,0 +1,103 @@
+{
+  "run_id": "20261114T232013Z-397fd2b3",
+  "status": "SUCCESS",
+  "started_at_utc": "2026-11-14T23:20:13+00:00",
+  "rules_version": "1.0.0",
+  "effective_config": {
+    "start_month": "2024-01",
+    "end_month": "2024-06",
+    "trip_base_url": "https://d37ci6vzurychx.cloudfront.net/trip-data",
+    "zone_lookup_url": "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv",
+    "data_dir": "data",
+    "reports_dir": "reports",
+    "memory_limit": "2GB",
+    "threads": 2,
+    "download_attempts": 3,
+    "taxi_types": {
+      "Yellow": {
+        "prefix": "yellow",
+        "pickup": "tpep_pickup_datetime",
+        "dropoff": "tpep_dropoff_datetime",
+        "pu_location": "PULocationID",
+        "do_location": "DOLocationID",
+        "distance": "trip_distance",
+        "fare": "fare_amount",
+        "passenger": "passenger_count"
+      },
+      "Green": {
+        "prefix": "green",
+        "pickup": "lpep_pickup_datetime",
+        "dropoff": "lpep_dropoff_datetime",
+        "pu_location": "PULocationID",
+        "do_location": "DOLocationID",
+        "distance": "trip_distance",
+        "fare": "fare_amount",
+        "passenger": "passenger_count"
+      },
+      "FHV": {
+        "prefix": "fhv",
+        "pickup": "pickup_datetime",
+        "dropoff": "dropOff_datetime",
+        "pu_location": "PUlocationID",
+        "do_location": "DOlocationID",
+        "distance": null,
+        "fare": null,
+        "passenger": null
+      },
+      "High Volume FHV": {
+        "prefix": "fhvhv",
+        "pickup": "pickup_datetime",
+        "dropoff": "dropoff_datetime",
+        "pu_location": "PULocationID",
+        "do_location": "DOLocationID",
+        "distance": "trip_miles",
+        "fare": "base_passenger_fare",
+        "passenger": null
+      }
+    }
+  },
+  "options": {
+    "offline": false,
+    "refresh": false,
+    "rebuild": false
+  },
+  "source_code_sha256": {
+    "run_pipeline.py": "4808a1ccb7c03ecedae0ebb7eea7fde665be1a0c6bd262b7056e3f3214623ad6",
+    "__init__.py": "14f45c300a477b1e0ec4129e0d39114e8d67a9f6b1c8738453ac8e6efd4ff952",
+    "config.py": "bc2fbab2937fd55c92c25491202ba12a0392dce312ff208b17a01fa3a750c9d5",
+    "download.py": "b1d426350249990f03f6d7c0814d8e95036504dbf2cc9dd53c82308a1760153d",
+    "pipeline.py": "28819601fbce02734280b6113e46b646674b369a3e6819284a3a1bc168ec61a4",
+    "report.py": "6151c75f304958cd2ff8704504e1f5155072f2783f568fd99b764a259a46643c",
+    "transform.py": "9b982181930c49f367141b2aae3ac4635afa507d55a8857f45a7b9f28d661afc"
+  },
+  "versions": {
+    "python": "3.13.3",
+    "duckdb": "1.5.5",
+    "requests": "2.33.1",
+    "matplotlib": "3.10.9"
+  },
+  "finished_at_utc": "2026-11-14T23:22:12+00:00",
+  "elapsed_seconds": 118.43,
+  "input_files": 24,
+  "actions": {
+    "processed": 24,
+    "downloaded": 24
+  },
+  "raw_count": 149655796,
+  "valid_count": 149655451,
+  "invalid_count": 345,
+  "curated_rows": 153662,
+  "curated_sha256": "64c8164b367b6aabcd143f98d1d0eaffbd465c93391933f823101bb3c8bd4ef2",
+  "curated_content_sha256": "bb69c5a4bfa6bd04121438de241f1db103f4f737c529377255818451dd20c769",
+  "answer": {
+    "period": "2024-01 to 2024-06",
+    "answers_original_question": true,
+    "metric": "valid trip-record count",
+    "winners": [
+      "High Volume FHV"
+    ],
+    "winner_valid_count": 120864668,
+    "total_valid_count": 149655451,
+    "winner_changed_after_cleaning": false
+  }
+}

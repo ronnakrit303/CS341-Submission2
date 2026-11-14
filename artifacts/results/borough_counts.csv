@@ -1,0 +1,32 @@
+taxi_type,borough,valid_count
+FHV,Unknown,6359833
+FHV,Queens,488769
+FHV,Brooklyn,484754
+FHV,Manhattan,325943
+FHV,Staten Island,308143
+FHV,Bronx,133286
+FHV,N/A,13711
+FHV,EWR,4789
+Green,Manhattan,199250
+Green,Queens,86916
+Green,Brooklyn,47853
+Green,Bronx,4826
+Green,Unknown,692
+Green,N/A,233
+Green,Staten Island,19
+Green,EWR,12
+High Volume FHV,Manhattan,47460846
+High Volume FHV,Brooklyn,31914106
+High Volume FHV,Queens,24847158
+High Volume FHV,Bronx,14885311
+High Volume FHV,Staten Island,1752476
+High Volume FHV,N/A,4767
+High Volume FHV,EWR,4
+Yellow,Manhattan,18108159
+Yellow,Queens,1831236
+Yellow,Brooklyn,253545
+Yellow,Unknown,65678
+Yellow,Bronx,58858
+Yellow,N/A,11065
+Yellow,EWR,2539
+Yellow,Staten Island,674
