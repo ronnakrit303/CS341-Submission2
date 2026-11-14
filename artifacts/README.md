@@ -5,7 +5,7 @@ These are actual full-data outputs exported from the two SUCCESS runs named in `
 - `curated/`: complete compressed daily pickup-zone fact table and a 200-row CSV example (up to 50 rows per type).
 - `quality/`: actual quality gates and all 24 source-file audits.
 - `results/`: analysis, ranking, monthly/borough totals and chart generated from curated data.
-- `runs/`: full-run and unchanged-rerun status plus chronological event logs; timestamps are UTC.
+- `runs/`: full-data run and unchanged-rerun status, structured events and readable `pipeline.log` for the updated logger; event timestamps are UTC. Earlier run evidence is retained as history.
 - `provenance/`: downloaded-source manifest, effective configuration and original notebook hash.
 - `file_manifest.json`: SHA-256 and bytes for every exported evidence file except this manifest itself.
 

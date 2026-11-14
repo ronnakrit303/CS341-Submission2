@@ -1,4 +1,9 @@
 import csv
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
 import duckdb
 import pytest
 
@@ -98,6 +103,12 @@ def test_failed_refresh_keeps_last_success(fixture_config, failure):
     assert (config.reports_dir / "latest.json").read_bytes() == previous
     failed = [read_json(p) for p in (config.reports_dir / "runs").glob("*/run.json") if read_json(p)["status"] == "FAILED"]
     assert len(failed) == 1
+    run = failed[0]
+    assert run["steps"][run["current_step"] - 1]["status"] == "FAILED"
+    assert all(step["status"] == "SKIPPED" for step in run["steps"][run["current_step"]:])
+    log = (config.reports_dir / "runs" / run["run_id"] / "pipeline.log").read_text(encoding="utf-8")
+    assert "[PIPELINE] [FAILED]" in log
+    assert "[PIPELINE] [SUCCESS]" not in log
     assert not (config.data_dir / ".pipeline.lock").exists()
 
 
@@ -207,3 +218,59 @@ def test_exported_snapshot_is_independently_verifiable_and_tampering_fails(fixtu
     target.write_text("tampered", encoding="utf-8")
     with pytest.raises(RuntimeError, match="hash/size mismatch"):
         verify(config.root)
+
+
+def test_readable_log_reports_complete_ordered_flow_and_cache_actions(fixture_config, capsys):
+    config, _ = fixture_config
+    run_pipeline(config)
+    capsys.readouterr()
+    result = run_pipeline(config, offline=True)
+    output = capsys.readouterr().out
+    _, directory = latest(config)
+    assert (directory / "pipeline.log").read_text(encoding="utf-8") == output
+    events = [json.loads(line) for line in (directory / "events.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert [e["step"] for e in events if e["event"] == "STEP_START"] == list(range(1, 8))
+    assert [e["step"] for e in events if e["event"] == "STEP_END"] == list(range(1, 8))
+    assert all(e["step_total"] == 7 for e in events)
+    assert events[-1]["status"] == "SUCCESS"
+    assert "[STEP 03/07] [RUNNING] TRIPS" in output
+    assert "[FILE 04/04] [TRANSFORM] [OK] REUSED" in output
+    assert "[PIPELINE] [SUCCESS]" in output
+    assert "Quality" in output and "Chart" in output and "Readable log" in output
+    assert len(result["steps"]) == 7 and all(step["status"] == "OK" for step in result["steps"])
+
+
+def test_publish_failure_never_logs_success_or_updates_latest(fixture_config, monkeypatch, capsys):
+    import taxi_pipeline.pipeline as pipeline
+    config, _ = fixture_config
+    run_pipeline(config)
+    previous = (config.reports_dir / "latest.json").read_bytes()
+    capsys.readouterr()
+    original = pipeline.write_json
+
+    def fail_latest(path, value):
+        if path == config.reports_dir / "latest.json":
+            raise OSError("Simulated publication failure")
+        return original(path, value)
+
+    monkeypatch.setattr(pipeline, "write_json", fail_latest)
+    with pytest.raises(OSError, match="publication failure"):
+        run_pipeline(config, offline=True)
+    output = capsys.readouterr().out
+    assert "[STEP 07/07] [FAILED] PUBLISH" in output
+    assert "[PIPELINE] [SUCCESS]" not in output
+    assert (config.reports_dir / "latest.json").read_bytes() == previous
+    failed = [read_json(p) for p in (config.reports_dir / "runs").glob("*/run.json") if read_json(p)["status"] == "FAILED"]
+    assert failed[0]["steps"][-1]["status"] == "FAILED"
+
+
+def test_cli_preflight_error_is_utf8_even_when_redirected_with_ascii_encoding():
+    root = Path(__file__).resolve().parents[1]
+    env = {**os.environ, "PYTHONIOENCODING": "ascii"}
+    result = subprocess.run([sys.executable, str(root / "run_pipeline.py"), "--start-month", "2024-13"],
+                            cwd=root, env=env, capture_output=True, timeout=30)
+    assert result.returncode == 1
+    error = result.stderr.decode("utf-8")
+    assert "[STEP 01/07] [FAILED] PREPARE" in error
+    assert "ไม่สามารถเริ่ม pipeline ได้" in error
+    assert "UnicodeEncodeError" not in error

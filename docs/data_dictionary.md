@@ -65,3 +65,6 @@ record ที่ไม่ผิดกฎเหล่านี้เป็น val
 | `quality/quality.json` | quality gates ทั้งหมด, totals และ zone coverage |
 | `runs/<run_id>/run.json` | สถานะ รุ่น dependencies/config/code hashes และผลของแต่ละรัน |
 | `runs/<run_id>/events.jsonl` | เหตุการณ์ตามลำดับ ตั้งแต่ START จน SUCCESS หรือ FAILED |
+| `runs/<run_id>/pipeline.log` | Log อ่านง่ายของรุ่นปัจจุบัน: แผน 7 ขั้น สถานะรายขั้น/รายไฟล์ และผลสรุป |
+
+สำหรับ run รุ่น log ใหม่ แต่ละ JSONL event มี `step`, `step_total`, `step_name`, `event`, `status`, `message` และ `at_utc` พร้อมข้อมูลเสริม เช่น `file_number`/`file_total` ใช้แยกตำแหน่งไฟล์ออกจากตำแหน่งขั้นตอน Event ที่ครอบคลุมทั้ง run จะมี `step=null` ส่วน `run.json` มี `step_total`, `current_step` และ `steps` ที่ระบุสถานะ/เวลาแต่ละขั้น หลักฐาน run เก่าที่เก็บไว้เป็นประวัติใช้ event schema เดิม

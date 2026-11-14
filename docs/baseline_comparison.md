@@ -11,6 +11,7 @@
 | ข้อมูลใหม่ | แก้ตัวแปรและตรวจ cell ที่เกี่ยวข้อง | เปลี่ยน end month/config แล้วสั่งรัน; ตรวจ requested coverage ใหม่ทุกครั้ง |
 | Data quality | schema, counts และ reconciliation | คงกฎเดิม เพิ่ม unique lookup keys, join preservation, curated keys/date bounds และ persisted reports |
 | เมื่อผิดพลาด | หยุด notebook ด้วย INCOMPLETE | exit code ไม่เป็นศูนย์, FAILED run log และไม่แทน latest success |
+| อ่านสถานะการทำงาน | ผลแสดงตาม cell ของ notebook | แสดง flow 7 ขั้น, RUNNING/OK/FAILED/SKIPPED, ตัวนับไฟล์แยกจากขั้น, เวลา และ output paths พร้อมเก็บ pipeline.log |
 | คำตอบ | กราฟและข้อความใน notebook | ranking/answer JSON/Markdown/PNG สร้างจาก curated table พร้อมเปรียบเทียบ baseline |
 | การส่งงาน | notebook ไฟล์เดียว | GitHub repository: source/config/tests/docs/diagram/actual evidence |
 

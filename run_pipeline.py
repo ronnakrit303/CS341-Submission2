@@ -6,9 +6,11 @@ import sys
 
 from taxi_pipeline.config import Config
 from taxi_pipeline.pipeline import run_pipeline
+from taxi_pipeline.progress import STEPS, configure_terminal
 
 
 def main():
+    configure_terminal()
     parser = argparse.ArgumentParser(description="Reproducible NYC TLC daily taxi-count pipeline")
     parser.add_argument("--config", default="config/pipeline.json")
     parser.add_argument("--start-month", help="Inclusive YYYY-MM; default from config")
@@ -27,6 +29,8 @@ def main():
         print(f"Status: SUCCESS | Run ID: {run['run_id']} | Valid: {run['valid_count']:,}")
         return 0
     except Exception as exc:
+        if not getattr(exc, "pipeline_logged", False):
+            print(f"[STEP 01/{len(STEPS):02d}] [FAILED] PREPARE - ไม่สามารถเริ่ม pipeline ได้", file=sys.stderr)
         print(f"Status: FAILED | {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1
 

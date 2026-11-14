@@ -93,6 +93,26 @@ python run_pipeline.py --start-month 2024-01 --end-month 2024-07
 
 หากสำเร็จ CLI แสดง `Status: SUCCESS` และ exit code 0 หากผิดพลาดจะแสดง `Status: FAILED`, exit code 1 พร้อม evidence ใน run directory และไม่แทน latest success หาก config ไม่ถูกต้องหรือพบ lock จะหยุดก่อนเริ่ม data run
 
+### อ่าน flow จาก Terminal
+
+ก่อนเริ่มจะเห็น Run ID, ช่วงข้อมูล, mode, จำนวน inputs และรายชื่อ **7 ขั้นตอน** ครบทั้งหมด ระหว่างรัน `[STEP 03/07]` หมายถึงกำลังอยู่ขั้นที่ 3 จาก 7 ส่วน `[FILE 05/24]` หมายถึงไฟล์ที่ 5 จาก 24 **ภายในขั้น TRIPS** เป็นตัวนับคนละระดับกัน
+
+| Step | ชื่อใน log | สิ่งที่ทำ |
+|---|---|---|
+| 1/7 | PREPARE | เตรียมระบบ รายการข้อมูล และ run directory |
+| 2/7 | LOOKUP | รับ/ตรวจ CSV ของพื้นที่ ตรวจ schema และ unique keys |
+| 3/7 | TRIPS | ตรวจ raw SHA-256 หรือดาวน์โหลด แล้วตรวจ cache/คำนวณ audit และ daily aggregate ของแต่ละไฟล์ |
+| 4/7 | CURATED | รวม aggregates, LEFT JOIN พื้นที่ และเขียน curated Parquet |
+| 5/7 | QUALITY | แสดงผลตรวจแต่ละ gate และแจ้งข้อควรทราบเรื่องข้อมูล |
+| 6/7 | ANALYSIS | สร้างอันดับ สัดส่วน ตารางผลวิเคราะห์ ตัวอย่าง CSV และกราฟ |
+| 7/7 | PUBLISH | คำนวณ checksums บันทึกสถานะสำเร็จ และเปลี่ยน latest pointer |
+
+แต่ละขั้นมี `[RUNNING]` ตอนเริ่มและ `[OK]` พร้อมเวลาที่ใช้เมื่อจบ สำหรับไฟล์จะเห็น INPUT และ TRANSFORM แยกกัน: `PROCESSED` คือคำนวณ audit/aggregate ใหม่ ส่วน `REUSED` คือใช้ผลเดิมที่ input/config/logic ตรงกัน ไม่ได้อ้างว่าคำนวณทุกแถวใหม่ในรอบนั้น
+
+เมื่อจบมีตารางสถานะครบ 7 ขั้น จำนวน raw/valid/rejected records, curated rows, ผู้ชนะ, จำนวนไฟล์ที่ดาวน์โหลด/ใช้ซ้ำ และตำแหน่ง output แต่ละชนิด หากล้มเหลวจะแสดง `[FAILED]` ที่ขั้นที่เกิดปัญหา พร้อมเหตุผล และขั้นที่ยังไม่ได้ทำเป็น `SKIPPED` โดยไม่ประกาศว่าทั้ง pipeline สำเร็จ จำนวน rejected records และ `WARN` เช่น missing zones เป็นเรื่องคุณภาพข้อมูล ไม่ใช่ข้อผิดพลาดของโปรแกรมโดยอัตโนมัติ
+
+CLI กำหนด stdout/stderr เป็น UTF-8 เพื่อรองรับ log ภาษาไทยทั้งใน Terminal และการ redirect ข้อความ flow ถูกเก็บเป็น UTF-8 ที่ `reports/runs/<run_id>/pipeline.log` ส่วน `events.jsonl` เก็บ timestamp UTC, step number/total, step name, event และ status สำหรับตรวจด้วยโปรแกรม `run.json` ระบุสถานะของแต่ละขั้นไว้ด้วย ดู [ตัวอย่าง log จริงรุ่นปัจจุบัน](artifacts/runs/20261114T235624Z-5df4d3a7/pipeline.log) หรือ [ประวัติการรันทั้งหมด](artifacts/runs/)
+
 ## โครงสร้างและ data flow
 
 ```mermaid
@@ -167,7 +187,7 @@ print(con.execute("""
 
 ## หลักฐานการรันซ้ำและ tests
 
-[reproducibility.json](artifacts/reproducibility.json) ระบุ full run และ unchanged rerun จริง ทั้งคู่ได้ counts และ canonical curated-content hash เดียวกัน รันแรกประมวลผล 24 ไฟล์ ส่วน rerun ตรวจ raw SHA-256 แล้ว reuse aggregate partitions ครบ 24 ไฟล์ แต่ละรันมี config, code hashes, dependency versions และเวลาที่ใช้จริงใน [`artifacts/runs/`](artifacts/runs/) เวลาใน run logs เป็น UTC; บวก 7 ชั่วโมงเมื่อต้องการเวลาไทย ไม่ควรใช้เวลาเหล่านี้อ้าง performance ของทุกเครื่อง
+[reproducibility.json](artifacts/reproducibility.json) ระบุ full-data run และ unchanged rerun จริงของโค้ดรุ่นปัจจุบัน ทั้งคู่ได้ counts และ canonical curated-content hash เดียวกัน หลักฐานรุ่น log ใหม่รันครั้งแรกด้วย `--offline --rebuild` เพื่อคำนวณข้อมูลจริงครบ 24 ไฟล์จาก raw snapshot เดิมอีกครั้ง แล้ว rerun ด้วย `--offline` เพื่อ reuse partitions ครบ 24 ไฟล์ ไม่ดาวน์โหลดหลาย GB ซ้ำ แต่ละรันมี config, code hashes, dependency versions และเวลาที่ใช้จริงใน [`artifacts/runs/`](artifacts/runs/) ซึ่งยังเก็บหลักฐานรอบแรกที่ดาวน์โหลดจริงไว้เป็นประวัติด้วย เวลาใน event logs เป็น UTC; บวก 7 ชั่วโมงเมื่อต้องการเวลาไทย ไม่ควรใช้เวลาเหล่านี้อ้าง performance ของทุกเครื่อง
 
 ทดสอบ offline ด้วย `python -m pytest -q` ครอบคลุม schema 4 ประเภท, missing/invalid times, count reconciliation, unknown/NULL zones, duplicate lookup keys, input changes/new month, repeat equivalence, corrupt cache, failed-run publication, lock และ exported-evidence verification GitHub Actions ทดสอบด้วย fixtures เล็ก ไม่ดาวน์โหลดชุดข้อมูลเต็มทุก push จึงแยก **CI tests** ออกจาก **full-data execution evidence** อย่างชัดเจน
 

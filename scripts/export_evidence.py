@@ -48,8 +48,10 @@ def export(root=ROOT):
     for run in (previous, current):
         target = dest / "runs" / run["run_id"]
         target.mkdir(parents=True, exist_ok=True)
-        for filename in ("run.json", "events.jsonl"):
-            shutil.copyfile(root / "reports/runs" / run["run_id"] / filename, target / filename)
+        for filename in ("run.json", "events.jsonl", "pipeline.log"):
+            source = root / "reports/runs" / run["run_id"] / filename
+            if source.exists():
+                shutil.copyfile(source, target / filename)
     write_json(dest / "reproducibility.json", {
         "first_run": previous["run_id"], "unchanged_rerun": current["run_id"],
         "same_counts_and_curated_content": equivalent,
@@ -69,7 +71,7 @@ def export(root=ROOT):
         "- `curated/`: complete compressed daily pickup-zone fact table and a 200-row CSV example (up to 50 rows per type).\n"
         "- `quality/`: actual quality gates and all 24 source-file audits.\n"
         "- `results/`: analysis, ranking, monthly/borough totals and chart generated from curated data.\n"
-        "- `runs/`: full-run and unchanged-rerun status plus chronological event logs; timestamps are UTC.\n"
+        "- `runs/`: full-data run and unchanged-rerun status, structured events and readable `pipeline.log` for the updated logger; event timestamps are UTC. Earlier run evidence is retained as history.\n"
         "- `provenance/`: downloaded-source manifest, effective configuration and original notebook hash.\n"
         "- `file_manifest.json`: SHA-256 and bytes for every exported evidence file except this manifest itself.\n\n"
         "The local working paths (`reports/runs/...`, `data/curated/...`) are represented by these exported directories. "
