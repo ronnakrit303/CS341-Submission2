@@ -11,7 +11,7 @@ from html import escape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-W, H = 1280, 1544
+W, H = 1280, 1776
 BG = "#FFFFFF"
 SURFACE = "#FFFFFF"
 TEXT = "#263341"
@@ -70,6 +70,12 @@ def label(x, y, value, width, color=MUTED, size=17):
     parts.append('</g>')
 
 
+def caption(source, target, x, y, width, color=MUTED):
+    value = next(value for start, end, value, _ in edges
+                 if start == source and end == target)
+    label(x, y, value, width, color)
+
+
 def render_svg():
     parts.clear()
     nodes.clear()
@@ -88,63 +94,59 @@ def render_svg():
         text(56, 90, 'มกราคม–มิถุนายน 2024  •  4 ประเภทรถ × 6 เดือน  •  หมายเลข 01–07 ตรงกับขั้นตอนใน log', 18, MUTED),
     ])
 
-    # Routes are deliberately orthogonal. Data arrows do not imply parallel execution.
-    edge('configSource', 'prepare', 'M640 240 V296', '')
-    edge('zoneSource', 'lookup', 'M216 240 V472', 'ตารางพื้นที่')
-    edge('tripSource', 'trips', 'M1064 240 V472', 'ข้อมูลเที่ยวรถ')
-    edge('prepare', 'lookup', 'M528 408 V440 H440 V472', 'URL พื้นที่')
-    edge('prepare', 'trips', 'M752 408 V440 H840 V472', 'รายการไฟล์')
-    edge('lookup', 'curate', 'M296 600 V652 H480 V704', 'lookup ผ่านตรวจ')
-    edge('trips', 'curate', 'M984 600 V652 H800 V704', 'ยอดรายวัน')
-    edge('curate', 'curatedStore', 'M640 824 V872', 'ข้อมูลหลังเชื่อมพื้นที่')
-    edge('curatedStore', 'quality', 'M640 1004 V1048 H216 V1104', 'curated')
-    edge('trips', 'quality', 'M1224 552 H1252 V1072 H312 V1104', 'audit: raw / valid / rejected')
-    edge('quality', 'analysis', 'M376 1164 H480', 'PASS')
-    edge('analysis', 'publish', 'M800 1164 H904', 'รายงาน')
-    edge('quality', 'failed', 'M216 1224 V1304', 'FAIL', color=RED, failed=True)
-    edge('analysis', 'analysisStore', 'M640 1224 V1284', 'ตาราง / กราฟ')
-    edge('publish', 'runEvidence', 'M1064 1224 V1304', 'สถานะรัน')
+    # Stage numbers show execution order; arrows describe data passed between stages.
+    edge('configSource', 'prepare', 'M640 280 V336', '')
+    edge('zoneSource', 'lookup', 'M216 280 V552', 'ข้อมูลพื้นที่')
+    edge('tripSource', 'trips', 'M1064 280 V552', 'ข้อมูลการเดินทาง')
+    edge('prepare', 'lookup', 'M528 480 V520 H440 V552', 'URL ของข้อมูลพื้นที่')
+    edge('prepare', 'trips', 'M752 480 V520 H840 V552', 'ไฟล์ที่ต้องประมวลผล')
+    edge('lookup', 'curate', 'M296 696 V744 H480 V792', 'ข้อมูลพื้นที่ที่ผ่านการตรวจสอบ')
+    edge('trips', 'curate', 'M984 696 V744 H800 V792', 'จำนวนเที่ยวรายวัน')
+    edge('curate', 'curatedStore', 'M640 912 V960', 'ข้อมูลที่เชื่อมกับพื้นที่แล้ว')
+    edge('curatedStore', 'quality', 'M640 1092 V1136 H216 V1200', 'ข้อมูลที่จัดเตรียมแล้ว')
+    edge('trips', 'quality', 'M1224 624 H1252 V1168 H312 V1200', 'Audit: raw / valid / rejected')
+    edge('quality', 'analysis', 'M376 1288 H480', 'PASS')
+    edge('analysis', 'publish', 'M800 1288 H904', 'ผลการวิเคราะห์')
+    edge('quality', 'failed', 'M216 1376 V1480', 'FAIL', color=RED, failed=True)
+    edge('analysis', 'analysisStore', 'M640 1376 V1480', 'ตารางและกราฟ')
+    edge('publish', 'runEvidence', 'M1064 1376 V1480', 'สถานะการรัน')
 
-    box('zoneSource', 56, 136, 320, 104, 'Taxi Zone Lookup', ('CSV จาก NYC TLC', 'รหัสพื้นที่ ชื่อพื้นที่ และ Borough'), 'source')
-    box('configSource', 480, 136, 320, 104, 'Pipeline config (JSON)', ('config/pipeline.json', 'ช่วงเดือน แหล่งข้อมูล และโฟลเดอร์'), 'source')
-    box('tripSource', 904, 136, 320, 104, 'Trip Records', ('Parquet จาก NYC TLC', '24 ไฟล์ จาก Taxi 4 ประเภท'), 'source')
+    box('zoneSource', 56, 136, 320, 144, 'Taxi Zone Lookup', ('ไฟล์ CSV จาก NYC TLC', 'ประกอบด้วยรหัสพื้นที่', 'ชื่อพื้นที่ และ Borough'), 'source')
+    box('configSource', 480, 136, 320, 144, 'Pipeline Config (JSON)', ('config/pipeline.json', 'กำหนดช่วงเวลา แหล่งข้อมูล', 'และตำแหน่งจัดเก็บไฟล์'), 'source')
+    box('tripSource', 904, 136, 320, 144, 'Trip Records', ('ข้อมูลการเดินทางรูปแบบ Parquet', 'จาก NYC TLC', 'รวม 24 ไฟล์ จาก Taxi 4 ประเภท'), 'source')
+    box('prepare', 480, 336, 320, 144, '01 · PREPARE', ('อ่านไฟล์ config และช่วงเวลาที่กำหนด', 'เตรียมรายการไฟล์สำหรับ', 'การประมวลผล'))
+    box('lookup', 56, 552, 480, 144, '02 · LOOKUP', ('โหลดและตรวจสอบข้อมูลพื้นที่จากไฟล์ CSV', 'ตรวจสอบรหัสพื้นที่ทั้ง 265 รหัสว่าไม่ซ้ำกัน', 'เก็บข้อมูลไว้ในหน่วยความจำเพื่อใช้งานต่อ'))
+    box('trips', 744, 552, 480, 144, '03 · TRIPS', ('ตรวจสอบ SHA-256 โครงสร้างข้อมูล และเงื่อนไขด้านเวลา', 'สรุปจำนวนเที่ยวรายวัน หรือใช้ผลเดิมจาก cache', 'หากข้อมูลตรงกัน'))
+    box('curate', 400, 792, 480, 120, '04 · CURATED', ('เชื่อมข้อมูลเที่ยวรายวันกับพื้นที่รับผู้โดยสารด้วย LEFT JOIN', 'เก็บเที่ยวที่ไม่ทราบพื้นที่ไว้ในกลุ่ม Unknown'))
+    cylinder('curatedStore', 360, 960, 560, 132, 'Curated Parquet', ('daily_zone_counts.parquet · trip_count', 'สรุปจำนวนเที่ยวแยกตามวัน ประเภท Taxi พื้นที่ และไฟล์ต้นทาง'))
+    box('quality', 56, 1200, 320, 176, '05 · QUALITY', ('ตรวจสอบคุณภาพข้อมูล', 'ตามเงื่อนไขทั้ง 10 ข้อ', 'เปรียบเทียบยอดข้อมูลที่สรุปแล้ว', 'กับผลการตรวจสอบใน audit'), 'quality')
+    box('analysis', 480, 1200, 320, 176, '06 · ANALYSIS', ('สรุปจำนวนเที่ยวและจัดอันดับ Taxi', 'แต่ละประเภท', 'สร้างตารางและกราฟ', 'แสดงผลการวิเคราะห์'))
+    box('publish', 904, 1200, 320, 176, '07 · PUBLISH', ('บันทึกสถานะ SUCCESS', 'พร้อม content hash', 'อัปเดต latest.json ให้ชี้ไปยัง', 'รอบที่สำเร็จล่าสุด'))
+    box('failed', 56, 1480, 320, 156, 'FAILED', ('บันทึกรายละเอียดข้อผิดพลาดลงใน log', 'เก็บผลลัพธ์จากรอบที่สำเร็จก่อนหน้าไว้'), 'failed')
+    cylinder('analysisStore', 480, 1480, 320, 156, 'Analysis Results', ('ผลการจัดอันดับ จำนวนเที่ยวรายเดือน', 'และข้อมูลแยกตามพื้นที่', 'ผลลัพธ์ในรูปแบบ CSV และกราฟ'))
+    box('runEvidence', 904, 1480, 320, 156, 'Run Logs & Evidence', ('ไฟล์ run.json และ pipeline.log', 'latest.json สำหรับอ้างอิง', 'ผลการรันล่าสุดที่สำเร็จ'), 'evidence')
 
-    box('prepare', 480, 296, 320, 112, '01 · PREPARE', ('อ่าน config และช่วงเดือน', 'เตรียมรายการไฟล์ของรอบรัน'))
-    box('lookup', 56, 472, 480, 128, '02 · LOOKUP', ('รับและตรวจตารางพื้นที่ CSV', 'ยืนยัน 265 รหัสไม่ซ้ำ เก็บ lookup ในหน่วยความจำ'))
-    box('trips', 744, 472, 480, 128, '03 · TRIPS', ('ตรวจ SHA-256, schema และกฎเวลา', 'สรุปรายวัน หรือใช้ cache ที่ตรงกัน'))
-    box('curate', 400, 704, 480, 120, '04 · CURATED', ('LEFT JOIN ยอดรายวันกับพื้นที่รับผู้โดยสาร', 'คงเที่ยวที่ไม่ทราบพื้นที่เป็น Unknown'))
-
-    cylinder('curatedStore', 400, 872, 480, 132, 'Curated Parquet', ('daily_zone_counts.parquet  •  trip_count', 'วัน × ประเภทรถ × พื้นที่ × ไฟล์ต้นทาง'))
-
-    box('quality', 56, 1104, 320, 120, '05 · QUALITY', ('ตรวจคุณภาพ 10 เงื่อนไข', 'เทียบยอด curated กับ audit'), 'quality')
-    box('analysis', 480, 1104, 320, 120, '06 · ANALYSIS', ('รวมยอดและจัดอันดับ Taxi', 'สร้างตารางและกราฟ'))
-    box('publish', 904, 1104, 320, 120, '07 · PUBLISH', ('บันทึก SUCCESS และ content hash', 'อัปเดต latest.json ในเครื่อง'))
-
-    box('failed', 56, 1304, 320, 104, 'FAILED', ('บันทึกข้อผิดพลาดใน log', 'คงผลสำเร็จของรอบก่อน'), 'failed')
-    cylinder('analysisStore', 480, 1284, 320, 124, 'Analysis results', ('อันดับ / รายเดือน / พื้นที่', 'CSV และกราฟ'))
-    box('runEvidence', 904, 1304, 320, 104, 'Run logs & evidence', ('run.json / pipeline.log', 'latest.json ชี้รอบสำเร็จ'), 'evidence')
-
-    label(216, 356, 'ตารางพื้นที่', 112)
-    label(1064, 356, 'ข้อมูลเที่ยวรถ', 134)
-    label(416, 420, 'URL พื้นที่', 118)
-    label(884, 420, 'รายการไฟล์', 120)
-    label(398, 630, 'lookup ผ่านตรวจ', 152)
-    label(888, 630, 'ยอดรายวัน', 122)
-    label(806, 848, 'ข้อมูลหลังเชื่อมพื้นที่', 190)
-    label(390, 1048, 'curated', 86)
-    label(1020, 1072, 'audit: raw / valid / rejected', 242)
-    label(428, 1144, 'PASS', 64, GREEN)
-    label(852, 1144, 'รายงาน', 86)
-    label(216, 1266, 'FAIL', 64, RED)
-    label(640, 1252, 'ตาราง / กราฟ', 132)
-    label(1064, 1266, 'สถานะรัน', 104)
+    caption('zoneSource', 'lookup', 216, 410, 94)
+    caption('tripSource', 'trips', 1064, 410, 136)
+    caption('prepare', 'lookup', 396, 500, 154)
+    caption('prepare', 'trips', 920, 500, 156)
+    caption('lookup', 'curate', 432, 722, 218)
+    caption('trips', 'curate', 884, 722, 142)
+    caption('curate', 'curatedStore', 862, 936, 184)
+    caption('curatedStore', 'quality', 414, 1136, 156)
+    caption('trips', 'quality', 1020, 1168, 226)
+    caption('quality', 'analysis', 428, 1268, 64, GREEN)
+    caption('analysis', 'publish', 852, 1268, 102)
+    caption('quality', 'failed', 216, 1428, 64, RED)
+    caption('analysis', 'analysisStore', 640, 1428, 122)
+    caption('publish', 'runEvidence', 1064, 1428, 110)
 
     # Minimal legend: colors encode function; shapes and text carry the same meaning.
-    parts.append(f'<path d="M56 1448 H1224" stroke="#D7DFE5" stroke-width="1"/>')
+    parts.append(f'<path d="M56 1680 H1224" stroke="#D7DFE5" stroke-width="1"/>')
     for x, color, title in [(56, BLUE, 'ขั้นตอน'), (232, GREEN, 'ชุดข้อมูล / ผลลัพธ์'), (512, AMBER, 'จุดตรวจคุณภาพ'), (772, RED, 'เส้นทางผิดพลาด')]:
-        parts.append(f'<path d="M{x} 1477 H{x+24}" stroke="{color}" stroke-width="2"/>')
-        parts.append(text(x+36, 1483, title, 17, MUTED))
-    parts.append(text(56, 1520, 'หากขั้นใดผิดพลาด ระบบบันทึก FAILED และเก็บผลสำเร็จเดิมไว้  •  PUBLISH คือบันทึกผลในเครื่อง', 17, MUTED))
+        parts.append(f'<path d="M{x} 1709 H{x+24}" stroke="{color}" stroke-width="2"/>')
+        parts.append(text(x+36, 1715, title, 17, MUTED))
+    parts.append(text(56, 1752, 'หากขั้นใดผิดพลาด ระบบบันทึก FAILED และเก็บผลสำเร็จเดิมไว้  •  PUBLISH คือบันทึกผลในเครื่อง', 17, MUTED))
     parts.append('</svg>')
 
     return "\n".join(parts) + "\n"
