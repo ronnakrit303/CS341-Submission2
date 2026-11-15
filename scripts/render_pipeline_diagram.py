@@ -12,16 +12,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 W, H = 1280, 1544
-BG = "#111417"
-SURFACE = "#191F24"
-TEXT = "#E5EBF0"
-SECONDARY = "#C1CBD4"
-MUTED = "#A4B0BB"
-BLUE = "#489EC0"
-GREEN = "#69A992"
-AMBER = "#D4AB67"
-RED = "#D27B80"
-EDGE = "#8A98A4"
+BG = "#FFFFFF"
+SURFACE = "#FFFFFF"
+TEXT = "#263341"
+SECONDARY = "#374654"
+MUTED = "#586674"
+BLUE = "#2B789A"
+GREEN = "#2D7C62"
+AMBER = "#9C702B"
+RED = "#B64C57"
+EDGE = "#697784"
 parts = []
 nodes = []
 edges = []
@@ -140,7 +140,7 @@ def render_svg():
     label(1064, 1266, 'สถานะรัน', 104)
 
     # Minimal legend: colors encode function; shapes and text carry the same meaning.
-    parts.append(f'<path d="M56 1448 H1224" stroke="#36404A" stroke-width="1"/>')
+    parts.append(f'<path d="M56 1448 H1224" stroke="#D7DFE5" stroke-width="1"/>')
     for x, color, title in [(56, BLUE, 'ขั้นตอน'), (232, GREEN, 'ชุดข้อมูล / ผลลัพธ์'), (512, AMBER, 'จุดตรวจคุณภาพ'), (772, RED, 'เส้นทางผิดพลาด')]:
         parts.append(f'<path d="M{x} 1477 H{x+24}" stroke="{color}" stroke-width="2"/>')
         parts.append(text(x+36, 1483, title, 17, MUTED))
