@@ -1,0 +1,181 @@
+{
+  "started_at_utc": "2026-11-15T14:55:00+00:00",
+  "executor": "Codex-assisted run on the user's Windows computer",
+  "repository_revision": "ac7a8a1194144e9a728b3999715c50878c7b9b45",
+  "python_executable": "C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+  "capture_script_sha256": "93583023ae0442e7515b9c5e638124a683aae5379b318ea48d226289746cafcd",
+  "status": "SUCCESS",
+  "commands": [
+    {
+      "command": "python -m pytest -v",
+      "started_at_utc": "2026-11-15T14:55:00+00:00",
+      "finished_at_utc": "2026-11-15T14:55:14+00:00",
+      "exit_code": 0,
+      "screenshot": "01-pytest.png",
+      "transcript": "transcripts/01-pytest.txt",
+      "width": 1299,
+      "height": 987,
+      "method": "Win32 PrintWindow of task-owned conhost"
+    },
+    {
+      "command": "python run_pipeline.py --offline --rebuild",
+      "started_at_utc": "2026-11-15T14:55:14+00:00",
+      "finished_at_utc": "2026-11-15T14:55:36+00:00",
+      "exit_code": 0,
+      "screenshot": "02-rebuild.png",
+      "transcript": "transcripts/02-rebuild.txt",
+      "width": 1299,
+      "height": 987,
+      "method": "Win32 PrintWindow of task-owned conhost"
+    },
+    {
+      "command": "python run_pipeline.py --offline",
+      "started_at_utc": "2026-11-15T14:55:37+00:00",
+      "finished_at_utc": "2026-11-15T14:55:42+00:00",
+      "exit_code": 0,
+      "screenshot": "03-cache-rerun.png",
+      "transcript": "transcripts/03-cache-rerun.txt",
+      "width": 1299,
+      "height": 987,
+      "method": "Win32 PrintWindow of task-owned conhost"
+    },
+    {
+      "command": "python scripts/capture_run_evidence.py quality 20261115T145537Z-b1ec3dc7",
+      "started_at_utc": "2026-11-15T14:55:42+00:00",
+      "finished_at_utc": "2026-11-15T14:55:43+00:00",
+      "exit_code": 0,
+      "screenshot": "04-quality.png",
+      "transcript": "transcripts/04-quality.txt",
+      "width": 1299,
+      "height": 987,
+      "method": "Win32 PrintWindow of task-owned conhost"
+    },
+    {
+      "command": "python scripts/capture_run_evidence.py compare 20261115T145515Z-7c809476 20261115T145537Z-b1ec3dc7",
+      "started_at_utc": "2026-11-15T14:55:43+00:00",
+      "finished_at_utc": "2026-11-15T14:55:43+00:00",
+      "exit_code": 0,
+      "screenshot": "05-reproducibility.png",
+      "transcript": "transcripts/05-reproducibility.txt",
+      "width": 1299,
+      "height": 987,
+      "method": "Win32 PrintWindow of task-owned conhost"
+    },
+    {
+      "command": "python scripts/verify_artifacts.py",
+      "started_at_utc": "2026-11-15T14:55:44+00:00",
+      "finished_at_utc": "2026-11-15T14:55:45+00:00",
+      "exit_code": 0,
+      "screenshot": "06-verify-artifacts.png",
+      "transcript": "transcripts/06-verify-artifacts.txt",
+      "width": 1299,
+      "height": 987,
+      "method": "Win32 PrintWindow of task-owned conhost"
+    }
+  ],
+  "rebuild_run_id": "20261115T145515Z-7c809476",
+  "cache_run_id": "20261115T145537Z-b1ec3dc7",
+  "finished_at_utc": "2026-11-15T14:55:46+00:00",
+  "files": [
+    {
+      "path": "01-pytest.png",
+      "bytes": 115332,
+      "sha256": "ceaa5eca5ba10ffdca3378987e99e3924c164bec776c6f813c1b3a4624c34810"
+    },
+    {
+      "path": "02-rebuild.png",
+      "bytes": 85820,
+      "sha256": "67133616fea0231f7ada6bd5d716d5cdcdf46141171481c07173285f39133089"
+    },
+    {
+      "path": "03-cache-rerun.png",
+      "bytes": 84876,
+      "sha256": "ce4ca68e28d68f660c3a43ed64e5bb054dcc42bfe042d4b1b3e76c5f9006f887"
+    },
+    {
+      "path": "04-quality.png",
+      "bytes": 89699,
+      "sha256": "41046afc002e5f4f4f56c6919fbcb200325811b8ac92113c6cf1e02087673914"
+    },
+    {
+      "path": "05-reproducibility.png",
+      "bytes": 93278,
+      "sha256": "d6281e6d604809b44844bfe8fbc80e39d9d03305ab10b076ae66e12d1af80ccc"
+    },
+    {
+      "path": "06-verify-artifacts.png",
+      "bytes": 88458,
+      "sha256": "03b983729ff95dac5890d61b28d472c55d54d8531d697f7df0428dd267cb30a9"
+    },
+    {
+      "path": "runs/20261115T145515Z-7c809476/events.jsonl",
+      "bytes": 55109,
+      "sha256": "b78a17ec05d1122f5db4d8536d7a0329e6145c2985643c0c708ba4b85258c578"
+    },
+    {
+      "path": "runs/20261115T145515Z-7c809476/pipeline.log",
+      "bytes": 19147,
+      "sha256": "cd3551b2376fa971383d978a7af2903af0c0f5ae221f969d545d0712305f77d5"
+    },
+    {
+      "path": "runs/20261115T145515Z-7c809476/quality.json",
+      "bytes": 2064,
+      "sha256": "d8a1a903b7b0d2795b1885d168dc22de5d8cad7198c7e7c0ee11bbf9e9175c3f"
+    },
+    {
+      "path": "runs/20261115T145515Z-7c809476/run.json",
+      "bytes": 6015,
+      "sha256": "0b9b8c740469e61a2e415292c5db11c166b994bc4abcf9456141836524dd7269"
+    },
+    {
+      "path": "runs/20261115T145537Z-b1ec3dc7/events.jsonl",
+      "bytes": 55781,
+      "sha256": "3e411cb53ca7ec6b0f55af388d6632ac1d6e51ea27583cf50765e2ce82c51a78"
+    },
+    {
+      "path": "runs/20261115T145537Z-b1ec3dc7/pipeline.log",
+      "bytes": 19915,
+      "sha256": "ab69323aa2c715cb736a3f685834f441fb928f985f016ec66194efa59deeb4e5"
+    },
+    {
+      "path": "runs/20261115T145537Z-b1ec3dc7/quality.json",
+      "bytes": 2064,
+      "sha256": "d8a1a903b7b0d2795b1885d168dc22de5d8cad7198c7e7c0ee11bbf9e9175c3f"
+    },
+    {
+      "path": "runs/20261115T145537Z-b1ec3dc7/run.json",
+      "bytes": 6012,
+      "sha256": "6470516fac51cef39d49c3228a8c98213b4e9bc0e00748ac540004d5df2bccf3"
+    },
+    {
+      "path": "transcripts/01-pytest.txt",
+      "bytes": 3654,
+      "sha256": "e28fcd9e645da0f2550fb82a4b5127d83ea1464ced6db51a1ae2e8ee321d4388"
+    },
+    {
+      "path": "transcripts/02-rebuild.txt",
+      "bytes": 19553,
+      "sha256": "699b3f3b8e132122fc90a9e8937d2c36ad58c33a6dfb8987c03d0b3f0e260509"
+    },
+    {
+      "path": "transcripts/03-cache-rerun.txt",
+      "bytes": 20301,
+      "sha256": "5f5f295fb1f7037ae632d33a37c50a9da5600366f6873f336a0ed65eb98494c2"
+    },
+    {
+      "path": "transcripts/04-quality.txt",
+      "bytes": 921,
+      "sha256": "f4b7d2fcf024daa39b4812d0e03ac7ca9ae00a04aa520bc7d858ef10bbd1f57b"
+    },
+    {
+      "path": "transcripts/05-reproducibility.txt",
+      "bytes": 1148,
+      "sha256": "4bbbc297e496c9f93336796bad344e6a0a05aca060cb772e974229cfbce210e9"
+    },
+    {
+      "path": "transcripts/06-verify-artifacts.txt",
+      "bytes": 418,
+      "sha256": "f64dbe918f1b7c70c1b69ec35d49a6319e70c7da2bc455b4448708350a70301b"
+    }
+  ]
+}

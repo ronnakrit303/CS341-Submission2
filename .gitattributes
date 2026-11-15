@@ -4,3 +4,5 @@
 *.ipynb -text
 # Preserve exact evidence bytes: file_manifest.json hashes the generated files.
 artifacts/** -text whitespace=cr-at-eol
+# Screenshot-session manifests also hash exact Windows-generated report bytes.
+docs/evidence/** -text whitespace=cr-at-eol

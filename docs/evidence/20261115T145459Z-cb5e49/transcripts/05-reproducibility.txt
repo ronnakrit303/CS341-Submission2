@@ -1,0 +1,22 @@
+CS341 SUBMISSION 2 - ACTUAL EXECUTION
+Working directory: C:\Users\ASUS\Desktop\CS341-Submission-2
+Started (UTC): 2026-11-15T14:55:43+00:00
+C:\Users\ASUS\Desktop\CS341-Submission-2> python scripts/capture_run_evidence.py compare 20261115T145515Z-7c809476 20261115T145537Z-b1ec3dc7
+
+REBUILD RUN : 20261115T145515Z-7c809476
+CACHE RERUN : 20261115T145537Z-b1ec3dc7
+STATUS      : SUCCESS / SUCCESS
+REBUILD     : {'processed': 24, 'cached_verified': 24}
+RERUN       : {'reused': 24, 'cached_verified': 24}
+VALID       : 149,655,451 / 149,655,451
+REJECTED    : 345 / 345
+CURATED ROWS: 153,662 / 153,662
+FIRST CONTENT SHA-256 : bb69c5a4bfa6bd04121438de241f1db103f4f737c529377255818451dd20c769
+SECOND CONTENT SHA-256: bb69c5a4bfa6bd04121438de241f1db103f4f737c529377255818451dd20c769
+PASS: new Run ID; same configuration, code, counts and curated content
+PASS: all inputs recomputed first; all inputs reused on the second run
+PASS: curated content also matches the committed artifacts snapshot
+
+Command: python scripts/capture_run_evidence.py compare 20261115T145515Z-7c809476 20261115T145537Z-b1ec3dc7
+Exit code: 0
+Finished (UTC): 2026-11-15T14:55:43+00:00

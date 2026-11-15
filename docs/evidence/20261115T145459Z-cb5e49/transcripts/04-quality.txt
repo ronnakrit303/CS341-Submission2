@@ -1,0 +1,23 @@
+CS341 SUBMISSION 2 - ACTUAL EXECUTION
+Working directory: C:\Users\ASUS\Desktop\CS341-Submission-2
+Started (UTC): 2026-11-15T14:55:42+00:00
+C:\Users\ASUS\Desktop\CS341-Submission-2> python scripts/capture_run_evidence.py quality 20261115T145537Z-b1ec3dc7
+
+RUN: 20261115T145537Z-b1ec3dc7
+QUALITY STATUS: PASS
+ 1. PASS  complete_unique_input_coverage
+ 2. PASS  required_schemas_and_nonempty_inputs
+ 3. PASS  per_file_rejection_accounting
+ 4. PASS  raw_equals_valid_plus_rejected
+ 5. PASS  positive_valid_total
+ 6. PASS  curated_equals_valid_total
+ 7. PASS  zone_join_preserves_trip_count
+ 8. PASS  unique_curated_keys
+ 9. PASS  positive_curated_group_counts
+10. PASS  curated_dates_within_requested_period
+PASS: 10/10 quality gates
+RAW: 149,655,796 | VALID: 149,655,451 | REJECTED: 345
+
+Command: python scripts/capture_run_evidence.py quality 20261115T145537Z-b1ec3dc7
+Exit code: 0
+Finished (UTC): 2026-11-15T14:55:43+00:00

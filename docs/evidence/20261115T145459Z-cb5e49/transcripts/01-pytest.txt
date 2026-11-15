@@ -1,0 +1,51 @@
+CS341 SUBMISSION 2 - ACTUAL EXECUTION
+Working directory: C:\Users\ASUS\Desktop\CS341-Submission-2
+Started (UTC): 2026-11-15T14:55:00+00:00
+C:\Users\ASUS\Desktop\CS341-Submission-2> python -m pytest -v
+
+============================= test session starts =============================
+platform win32 -- Python 3.13.3, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\ASUS\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\ASUS\Desktop\CS341-Submission-2
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.13.0
+collecting ... collected 31 items
+
+tests/test_atomic_files.py::test_json_write_retries_windows_lock_and_keeps_previous_file[5] PASSED [  3%]
+tests/test_atomic_files.py::test_json_write_retries_windows_lock_and_keeps_previous_file[32] PASSED [  6%]
+tests/test_atomic_files.py::test_json_write_retries_windows_lock_and_keeps_previous_file[33] PASSED [  9%]
+tests/test_atomic_files.py::test_persistent_windows_lock_is_bounded_and_keeps_previous_file PASSED [ 12%]
+tests/test_atomic_files.py::test_unrelated_errors_are_not_retried[error0] PASSED [ 16%]
+tests/test_atomic_files.py::test_unrelated_errors_are_not_retried[error1] PASSED [ 19%]
+tests/test_atomic_files.py::test_json_write_recovers_after_real_windows_file_lock PASSED [ 22%]
+tests/test_atomic_files.py::test_audit_file_lock_recovery_and_failed_run_publication[False] PASSED [ 25%]
+tests/test_atomic_files.py::test_audit_file_lock_recovery_and_failed_run_publication[True] PASSED [ 29%]
+tests/test_pipeline.py::test_four_schemas_rejections_join_and_answer PASSED [ 32%]
+tests/test_pipeline.py::test_unchanged_offline_rerun_is_identical_without_accumulation PASSED [ 35%]
+tests/test_pipeline.py::test_refresh_changed_partition_only_and_no_deduplication PASSED [ 38%]
+tests/test_pipeline.py::test_added_month_and_global_period_cache_invalidation PASSED [ 41%]
+tests/test_pipeline.py::test_failed_refresh_keeps_last_success[duplicate_lookup] PASSED [ 45%]
+tests/test_pipeline.py::test_failed_refresh_keeps_last_success[missing_schema] PASSED [ 48%]
+tests/test_pipeline.py::test_failed_refresh_keeps_last_success[empty_input] PASSED [ 51%]
+tests/test_pipeline.py::test_all_invalid_fails_quality_gate PASSED       [ 54%]
+tests/test_pipeline.py::test_zero_valid_types_are_kept_in_ranking PASSED [ 58%]
+tests/test_pipeline.py::test_cross_source_month_validity_and_fractional_zone PASSED [ 61%]
+tests/test_pipeline.py::test_corrupt_transformed_cache_is_recomputed PASSED [ 64%]
+tests/test_pipeline.py::test_corrupt_raw_snapshot_offline_fails PASSED   [ 67%]
+tests/test_pipeline.py::test_lock_is_not_removed_by_competing_run PASSED [ 70%]
+tests/test_pipeline.py::test_invalid_months_rejected[2024-13-2024-14] PASSED [ 74%]
+tests/test_pipeline.py::test_invalid_months_rejected[2024-2-2024-06] PASSED [ 77%]
+tests/test_pipeline.py::test_invalid_months_rejected[2024-06-2024-01] PASSED [ 80%]
+tests/test_pipeline.py::test_configuration_cannot_write_outside_workspace PASSED [ 83%]
+tests/test_pipeline.py::test_download_failure_does_not_replace_previous_snapshot PASSED [ 87%]
+tests/test_pipeline.py::test_exported_snapshot_is_independently_verifiable_and_tampering_fails PASSED [ 90%]
+tests/test_pipeline.py::test_readable_log_reports_complete_ordered_flow_and_cache_actions PASSED [ 93%]
+tests/test_pipeline.py::test_publish_failure_never_logs_success_or_updates_latest PASSED [ 96%]
+tests/test_pipeline.py::test_cli_preflight_error_is_utf8_even_when_redirected_with_ascii_encoding PASSED [100%]
+
+============================= 31 passed in 12.46s =============================
+
+Command: python -m pytest -v
+Exit code: 0
+Finished (UTC): 2026-11-15T14:55:14+00:00

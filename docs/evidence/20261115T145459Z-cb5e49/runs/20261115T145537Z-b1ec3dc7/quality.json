@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "complete_unique_input_coverage",
+      "passed": true,
+      "expected_files": 24,
+      "observed_files": 24
+    },
+    {
+      "check": "required_schemas_and_nonempty_inputs",
+      "passed": true
+    },
+    {
+      "check": "per_file_rejection_accounting",
+      "passed": true
+    },
+    {
+      "check": "raw_equals_valid_plus_rejected",
+      "passed": true
+    },
+    {
+      "check": "positive_valid_total",
+      "passed": true
+    },
+    {
+      "check": "curated_equals_valid_total",
+      "passed": true
+    },
+    {
+      "check": "zone_join_preserves_trip_count",
+      "passed": true
+    },
+    {
+      "check": "unique_curated_keys",
+      "passed": true
+    },
+    {
+      "check": "positive_curated_group_counts",
+      "passed": true
+    },
+    {
+      "check": "curated_dates_within_requested_period",
+      "passed": true
+    }
+  ],
+  "raw_count": 149655796,
+  "valid_count": 149655451,
+  "invalid_count": 345,
+  "lookup": {
+    "rows": 265,
+    "invalid_keys": 0,
+    "unique_keys": 265,
+    "empty_zone_names": 0
+  },
+  "curated_rows": 153662,
+  "trip_count": 149655451,
+  "nonpositive_groups": 0,
+  "duplicate_keys": 0,
+  "join_count_preserved": true,
+  "zone_coverage": [
+    {
+      "taxi_type": "FHV",
+      "zone_match_status": "matched",
+      "trip_count": 1759445
+    },
+    {
+      "taxi_type": "FHV",
+      "zone_match_status": "missing",
+      "trip_count": 6359783
+    },
+    {
+      "taxi_type": "Green",
+      "zone_match_status": "matched",
+      "trip_count": 339801
+    },
+    {
+      "taxi_type": "High Volume FHV",
+      "zone_match_status": "matched",
+      "trip_count": 120864668
+    },
+    {
+      "taxi_type": "Yellow",
+      "zone_match_status": "matched",
+      "trip_count": 20331754
+    }
+  ],
+  "diagnostics": {
+    "source_month_mismatch": 148,
+    "duplicate_candidates_in_first_10000_rows_per_file": 3686,
+    "diagnostics_do_not_reject_records": true
+  }
+}

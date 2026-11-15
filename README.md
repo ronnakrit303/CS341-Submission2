@@ -18,7 +18,7 @@ Repository นี้รวบรวมโค้ด เอกสารอธิ�
 | 1 | Source Code และ Workflow ที่ใช้งานจริง | ประกอบด้วย [ไฟล์เริ่มต้นสำหรับรันระบบ](run_pipeline.py), [โค้ดส่วนต่าง ๆ ของ pipeline](taxi_pipeline/), [ไฟล์ตั้งค่า](config/pipeline.json) และ [workflow สำหรับทดสอบบน GitHub Actions](.github/workflows/ci.yml) |
 | 2 | README อธิบายข้อมูล โครงสร้าง pipeline วิธีติดตั้ง และวิธีรัน | รายละเอียดอยู่ในหัวข้อ [ข้อมูลและกฎที่ใช้](#ข้อมูลและกฎที่ใช้), [ขั้นตอนการทำงาน](#pipeline-ทำอะไรบ้าง), [โครงสร้างโปรเจกต์](#โครงสร้างโปรเจกต์), [การติดตั้ง](#ติดตั้ง) และ [การรันกับข้อมูลจริง](#รัน-pipeline-กับข้อมูลจริง) |
 | 3 | Pipeline / Data Flow Diagram | มี [แผนภาพ Data Flow ใน README](#data-flow-diagram) พร้อม [ไฟล์ SVG](docs/images/pipeline-data-flow.svg) และ [ไฟล์ Mermaid](docs/pipeline.mmd) อธิบายการไหลของข้อมูลตั้งแต่รับข้อมูล ตรวจสอบและสรุปผล ไปจนถึงเชื่อมข้อมูลพื้นที่และสร้างผลวิเคราะห์ |
-| 4 | หลักฐานการรัน pipeline และสถานะการทำงาน | เก็บ [สถานะและ log ของแต่ละรอบ](artifacts/runs/) ในไฟล์ `run.json`, `pipeline.log` และ `events.jsonl` รวมถึง [reproducibility.json](artifacts/reproducibility.json) ที่ใช้ยืนยันว่ารอบคำนวณใหม่กับรอบใช้ cache ให้ผลลัพธ์ตรงกัน |
+| 4 | หลักฐานการรัน pipeline และสถานะการทำงาน | เก็บ [สถานะและ log ของแต่ละรอบ](artifacts/runs/) ในไฟล์ `run.json`, `pipeline.log` และ `events.jsonl` รวมถึง [reproducibility.json](artifacts/reproducibility.json) ที่ใช้ยืนยันว่ารอบคำนวณใหม่กับรอบใช้ cache ให้ผลลัพธ์ตรงกัน; [ภาพแคปจากคอนโซลจริง 6 ภาพ](docs/evidence/README.md) |
 | 5 | ตัวอย่างชุดข้อมูลพร้อมใช้สำหรับการวิเคราะห์ | มี [ไฟล์ CSV ตัวอย่าง 200 แถว](artifacts/curated/sample_daily_zone_counts.csv), [ชุดข้อมูล curated รูปแบบ Parquet จำนวน 153,662 แถว](artifacts/curated/daily_zone_counts.parquet) และ [คำอธิบายแต่ละคอลัมน์](docs/data_dictionary.md) |
 | 6 | ผลการตรวจสอบคุณภาพข้อมูล | มี [รายงานตรวจสอบคุณภาพข้อมูล](artifacts/quality/quality.json) ซึ่งผ่านเกณฑ์ทั้ง 10 ข้อ และ [รายงาน audit แยกตามไฟล์](artifacts/quality/file_audit.csv) สำหรับตรวจสอบจำนวนข้อมูลดิบ ข้อมูลที่ผ่านเกณฑ์ และข้อมูลที่ถูกคัดออก |
 | 7 | ผลวิเคราะห์ที่ตอบคำถามหลัก | มี [สรุปผลวิเคราะห์](artifacts/results/analysis.md), [ตารางจัดอันดับ](artifacts/results/ranking.csv) และ [กราฟเปรียบเทียบ](artifacts/results/taxi_usage.png) ซึ่งแสดงว่า High Volume FHV มีจำนวนเที่ยวที่ผ่านเกณฑ์มากที่สุดในช่วงครึ่งแรกของปี 2024 |
@@ -106,6 +106,10 @@ python -m pytest -v -k "added_month or refresh_changed or failed_refresh or all_
 ผลที่คาดหวังคือ `7 passed, 24 deselected` หมายถึงผ่าน 7 กรณี และไม่ได้เลือกอีก 24 กรณีมาทดสอบ โดยใช้ข้อมูลขนาดเล็กใน `tmp/pytest-runs/` ซึ่งแยกจากข้อมูลจริง บางกรณีตั้งใจจำลองให้ pipeline หยุดทำงาน เพื่อยืนยันว่าระบบสามารถตรวจพบปัญหาและจัดการได้ตามที่กำหนด
 
 GitHub Actions จะรันชุดทดสอบและสคริปต์ตรวจสอบหลักฐานให้อัตโนมัติ สามารถดู [ผลการทดสอบบน GitHub](https://github.com/ronnakrit303/CS341-Submission2/actions) ได้ โดย workflow ใช้ข้อมูลทดสอบขนาดเล็กและไฟล์ใน `artifacts/` ส่วนหลักฐานจากการประมวลผลข้อมูลดิบทั้งหมดเก็บไว้ใน [ประวัติการรัน](artifacts/runs/)
+
+### ภาพแคปจากการรันจริง
+
+ดู [ภาพหลักฐานทั้ง 6 ภาพ](docs/evidence/README.md) จากการรันบน Windows วันที่ 15 พฤศจิกายน 2569 โดยใช้ข้อมูลดิบในเครื่องครบ 24 ไฟล์ มีภาพ tests ผ่าน 31 ข้อ รอบคำนวณใหม่ รอบใช้ cache ผลตรวจคุณภาพ การเทียบ hash และผลตรวจ artifacts พร้อม log และข้อมูลกำกับของแต่ละคำสั่ง ชุดภาพนี้รันโดยมี Codex ช่วยเรียกคำสั่งและแคปหน้าต่างคอนโซลจริง
 
 ## รัน pipeline กับข้อมูลจริง
 
