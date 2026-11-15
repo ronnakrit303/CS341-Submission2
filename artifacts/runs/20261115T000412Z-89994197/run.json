@@ -1,0 +1,171 @@
+{
+  "run_id": "20261115T000412Z-89994197",
+  "status": "SUCCESS",
+  "started_at_utc": "2026-11-15T00:04:12+00:00",
+  "rules_version": "1.0.0",
+  "effective_config": {
+    "start_month": "2024-01",
+    "end_month": "2024-06",
+    "trip_base_url": "https://d37ci6vzurychx.cloudfront.net/trip-data",
+    "zone_lookup_url": "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv",
+    "data_dir": "data",
+    "reports_dir": "reports",
+    "memory_limit": "2GB",
+    "threads": 2,
+    "download_attempts": 3,
+    "taxi_types": {
+      "Yellow": {
+        "prefix": "yellow",
+        "pickup": "tpep_pickup_datetime",
+        "dropoff": "tpep_dropoff_datetime",
+        "pu_location": "PULocationID",
+        "do_location": "DOLocationID",
+        "distance": "trip_distance",
+        "fare": "fare_amount",
+        "passenger": "passenger_count"
+      },
+      "Green": {
+        "prefix": "green",
+        "pickup": "lpep_pickup_datetime",
+        "dropoff": "lpep_dropoff_datetime",
+        "pu_location": "PULocationID",
+        "do_location": "DOLocationID",
+        "distance": "trip_distance",
+        "fare": "fare_amount",
+        "passenger": "passenger_count"
+      },
+      "FHV": {
+        "prefix": "fhv",
+        "pickup": "pickup_datetime",
+        "dropoff": "dropOff_datetime",
+        "pu_location": "PUlocationID",
+        "do_location": "DOlocationID",
+        "distance": null,
+        "fare": null,
+        "passenger": null
+      },
+      "High Volume FHV": {
+        "prefix": "fhvhv",
+        "pickup": "pickup_datetime",
+        "dropoff": "dropoff_datetime",
+        "pu_location": "PULocationID",
+        "do_location": "DOLocationID",
+        "distance": "trip_miles",
+        "fare": "base_passenger_fare",
+        "passenger": null
+      }
+    }
+  },
+  "options": {
+    "offline": true,
+    "refresh": false,
+    "rebuild": false
+  },
+  "source_code_sha256": {
+    "run_pipeline.py": "4785fa356ab9d085257d2ba9fbff528b03301c75e09ceff75c70e907f1ed837a",
+    "__init__.py": "14f45c300a477b1e0ec4129e0d39114e8d67a9f6b1c8738453ac8e6efd4ff952",
+    "config.py": "bc2fbab2937fd55c92c25491202ba12a0392dce312ff208b17a01fa3a750c9d5",
+    "download.py": "b1d426350249990f03f6d7c0814d8e95036504dbf2cc9dd53c82308a1760153d",
+    "pipeline.py": "cb31db382461345e05eb60905ed949233ede0f3a5d304760fb8313fefbeb308e",
+    "progress.py": "25ca2e3afa39c79b8c2b522290682b335976a74bd8631db358dd5b7fe1561070",
+    "report.py": "6151c75f304958cd2ff8704504e1f5155072f2783f568fd99b764a259a46643c",
+    "transform.py": "9b982181930c49f367141b2aae3ac4635afa507d55a8857f45a7b9f28d661afc"
+  },
+  "step_total": 7,
+  "versions": {
+    "python": "3.13.3",
+    "duckdb": "1.5.5",
+    "requests": "2.33.1",
+    "matplotlib": "3.10.9"
+  },
+  "current_step": null,
+  "steps": [
+    {
+      "number": 1,
+      "name": "PREPARE",
+      "description": "เตรียมระบบและรายการข้อมูล",
+      "status": "OK",
+      "started_at_utc": "2026-11-15T00:04:12+00:00",
+      "finished_at_utc": "2026-11-15T00:04:12+00:00",
+      "elapsed_seconds": 0.014
+    },
+    {
+      "number": 2,
+      "name": "LOOKUP",
+      "description": "รับและตรวจสอบตารางพื้นที่ Taxi Zone",
+      "status": "OK",
+      "started_at_utc": "2026-11-15T00:04:12+00:00",
+      "finished_at_utc": "2026-11-15T00:04:12+00:00",
+      "elapsed_seconds": 0.016
+    },
+    {
+      "number": 3,
+      "name": "TRIPS",
+      "description": "รับ ตรวจสอบ และสรุปข้อมูล Trip Records",
+      "status": "OK",
+      "started_at_utc": "2026-11-15T00:04:12+00:00",
+      "finished_at_utc": "2026-11-15T00:04:16+00:00",
+      "elapsed_seconds": 3.242
+    },
+    {
+      "number": 4,
+      "name": "CURATED",
+      "description": "เชื่อมข้อมูลพื้นที่และสร้าง Curated Output",
+      "status": "OK",
+      "started_at_utc": "2026-11-15T00:04:16+00:00",
+      "finished_at_utc": "2026-11-15T00:04:16+00:00",
+      "elapsed_seconds": 0.213
+    },
+    {
+      "number": 5,
+      "name": "QUALITY",
+      "description": "ตรวจคุณภาพและความสอดคล้องของข้อมูล",
+      "status": "OK",
+      "started_at_utc": "2026-11-15T00:04:16+00:00",
+      "finished_at_utc": "2026-11-15T00:04:16+00:00",
+      "elapsed_seconds": 0.013
+    },
+    {
+      "number": 6,
+      "name": "ANALYSIS",
+      "description": "วิเคราะห์ จัดอันดับ และสร้างรายงาน",
+      "status": "OK",
+      "started_at_utc": "2026-11-15T00:04:16+00:00",
+      "finished_at_utc": "2026-11-15T00:04:16+00:00",
+      "elapsed_seconds": 0.256
+    },
+    {
+      "number": 7,
+      "name": "PUBLISH",
+      "description": "บันทึกผลสำเร็จและตำแหน่ง Output",
+      "status": "OK",
+      "started_at_utc": "2026-11-15T00:04:16+00:00",
+      "finished_at_utc": "2026-11-15T00:04:16+00:00",
+      "elapsed_seconds": 0.17
+    }
+  ],
+  "finished_at_utc": "2026-11-15T00:04:16+00:00",
+  "elapsed_seconds": 3.956,
+  "input_files": 24,
+  "actions": {
+    "reused": 24,
+    "cached_verified": 24
+  },
+  "raw_count": 149655796,
+  "valid_count": 149655451,
+  "invalid_count": 345,
+  "curated_rows": 153662,
+  "curated_sha256": "64c8164b367b6aabcd143f98d1d0eaffbd465c93391933f823101bb3c8bd4ef2",
+  "curated_content_sha256": "bb69c5a4bfa6bd04121438de241f1db103f4f737c529377255818451dd20c769",
+  "answer": {
+    "period": "2024-01 to 2024-06",
+    "answers_original_question": true,
+    "metric": "valid trip-record count",
+    "winners": [
+      "High Volume FHV"
+    ],
+    "winner_valid_count": 120864668,
+    "total_valid_count": 149655451,
+    "winner_changed_after_cleaning": false
+  }
+}

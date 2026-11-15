@@ -107,11 +107,11 @@ python run_pipeline.py --start-month 2024-01 --end-month 2024-07
 | 6/7 | ANALYSIS | สร้างอันดับ สัดส่วน ตารางผลวิเคราะห์ ตัวอย่าง CSV และกราฟ |
 | 7/7 | PUBLISH | คำนวณ checksums บันทึกสถานะสำเร็จ และเปลี่ยน latest pointer |
 
-แต่ละขั้นมี `[RUNNING]` ตอนเริ่มและ `[OK]` พร้อมเวลาที่ใช้เมื่อจบ สำหรับไฟล์จะเห็น INPUT และ TRANSFORM แยกกัน: `PROCESSED` คือคำนวณ audit/aggregate ใหม่ ส่วน `REUSED` คือใช้ผลเดิมที่ input/config/logic ตรงกัน ไม่ได้อ้างว่าคำนวณทุกแถวใหม่ในรอบนั้น
+แต่ละขั้นมี `[RUNNING]` ตอนเริ่มและ `[OK]` พร้อมเวลาที่ใช้เมื่อจบ มีลูกศรลง `↓` เชื่อมจากขั้นที่สำเร็จไปยังขั้นถัดไป รวมถึงในภาพรวม 7 ขั้นตอนตอนเริ่ม เพื่อให้อ่าน flow จากบนลงล่างได้ชัดเจน สำหรับไฟล์จะเห็น INPUT และ TRANSFORM แยกกัน: `PROCESSED` คือคำนวณ audit/aggregate ใหม่ ส่วน `REUSED` คือใช้ผลเดิมที่ input/config/logic ตรงกัน ไม่ได้อ้างว่าคำนวณทุกแถวใหม่ในรอบนั้น
 
 เมื่อจบมีตารางสถานะครบ 7 ขั้น จำนวน raw/valid/rejected records, curated rows, ผู้ชนะ, จำนวนไฟล์ที่ดาวน์โหลด/ใช้ซ้ำ และตำแหน่ง output แต่ละชนิด หากล้มเหลวจะแสดง `[FAILED]` ที่ขั้นที่เกิดปัญหา พร้อมเหตุผล และขั้นที่ยังไม่ได้ทำเป็น `SKIPPED` โดยไม่ประกาศว่าทั้ง pipeline สำเร็จ จำนวน rejected records และ `WARN` เช่น missing zones เป็นเรื่องคุณภาพข้อมูล ไม่ใช่ข้อผิดพลาดของโปรแกรมโดยอัตโนมัติ
 
-CLI กำหนด stdout/stderr เป็น UTF-8 เพื่อรองรับ log ภาษาไทยทั้งใน Terminal และการ redirect ข้อความ flow ถูกเก็บเป็น UTF-8 ที่ `reports/runs/<run_id>/pipeline.log` ส่วน `events.jsonl` เก็บ timestamp UTC, step number/total, step name, event และ status สำหรับตรวจด้วยโปรแกรม `run.json` ระบุสถานะของแต่ละขั้นไว้ด้วย ดู [ตัวอย่าง log จริงรุ่นปัจจุบัน](artifacts/runs/20261114T235624Z-5df4d3a7/pipeline.log) หรือ [ประวัติการรันทั้งหมด](artifacts/runs/)
+CLI กำหนด stdout/stderr เป็น UTF-8 เพื่อรองรับ log ภาษาไทยทั้งใน Terminal และการ redirect ข้อความ flow ถูกเก็บเป็น UTF-8 ที่ `reports/runs/<run_id>/pipeline.log` ส่วน `events.jsonl` เก็บ timestamp UTC, step number/total, step name, event และ status สำหรับตรวจด้วยโปรแกรม `run.json` ระบุสถานะของแต่ละขั้นไว้ด้วย ดู [ตัวอย่าง log จริงรุ่นปัจจุบัน](artifacts/runs/20261115T000412Z-89994197/pipeline.log) หรือ [ประวัติการรันทั้งหมด](artifacts/runs/)
 
 ## โครงสร้างและ data flow
 

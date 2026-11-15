@@ -80,6 +80,8 @@ class PipelineProgress:
         self.write(f"Inputs : {len(config.manifest())} trip files (Parquet) + 1 zone lookup (CSV)")
         self.write(f"Flow   : {self.total} steps")
         for step in self.steps:
+            if step["number"] > 1:
+                self.write("     ↓")
             self.write(f"  {step['number']}. {step['name']} - {step['description']}")
         self.write("Status : RUNNING=กำลังทำ | OK=สำเร็จ | WARN=ข้อควรทราบ | FAILED=ล้มเหลว | SKIPPED=ไม่ได้ทำ")
         self.write("=" * 76)
@@ -93,6 +95,9 @@ class PipelineProgress:
         step = self.steps[number - 1]
         step.update(status="RUNNING", started_at_utc=utc_now())
         self.write()
+        if number > 1:
+            self.write("        ↓")
+            self.write()
         self.write(f"[STEP {number:02d}/{self.total:02d}] [RUNNING] {step['name']} - {step['description']}")
         self.record("STEP_START", "RUNNING", step["description"])
 
