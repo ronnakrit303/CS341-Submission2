@@ -1,71 +1,182 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1560" viewBox="0 0 800 1560" role="img" aria-labelledby="diagramTitle diagramDescription">
-<title id="diagramTitle">NYC Taxi: Data Flow Diagram</title>
-<desc id="diagramDescription">ภาพรวมข้อมูล NYC TLC: เที่ยวรถ Parquet และตารางพื้นที่ CSV เข้าสู่ขั้น 1–3 รับและตรวจข้อมูล ขั้น 4 เชื่อมพื้นที่เป็น curated Parquet ขั้น 5 ตรวจคุณภาพ 10 เงื่อนไข หากผ่านจึงไปขั้น 6 วิเคราะห์และขั้น 7 บันทึกผลสำเร็จ หากผิดพลาดจะบันทึก FAILED และเก็บผลสำเร็จเดิม จำนวนเที่ยวรวมจาก trip_count</desc>
-<style>text { font-family: "Leelawadee UI", Tahoma, "Noto Sans Thai", sans-serif; font-variant-numeric: tabular-nums; }</style>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9 Z" fill="#526D84"/></marker></defs>
-<rect width="800" height="1560" fill="#FFFFFF"/>
-<text x="32" y="48" font-size="32" font-weight="600" fill="#253344" >NYC Taxi: Data Flow Diagram</text>
-<text x="32" y="84" font-size="22" font-weight="400" fill="#526170" >ข้อมูล NYC TLC มกราคม–มิถุนายน 2024</text>
-<path data-edge="trips:prepare" d="M204 256 V280 H400 V312" fill="none" stroke="#526D84" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<path data-edge="zones:prepare" d="M596 256 V280 H400 V312" fill="none" stroke="#526D84" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<path data-edge="prepare:join" d="M400 456 V504" fill="none" stroke="#526D84" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<path data-edge="join:curated" d="M400 640 V688" fill="none" stroke="#526D84" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<path data-edge="curated:quality" d="M400 848 V896" fill="none" stroke="#526D84" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<path data-edge="quality:analysis" d="M400 1032 V1080" fill="none" stroke="#526D84" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<path data-edge="analysis:publish" d="M400 1192 V1240" fill="none" stroke="#526D84" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<path data-edge="publish:outputs" d="M400 1352 V1400" fill="none" stroke="#526D84" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<g id="trips" data-bounds="32,128,344,128">
-<rect x="32" y="128" width="344" height="128" rx="0" fill="#F5F7F9" stroke="#7D8D9B" stroke-width="1.5"/>
-<text x="56" y="168" font-size="24" font-weight="600" fill="#253344" >ข้อมูลเที่ยวรถ</text>
-<text x="56" y="208" font-size="20" font-weight="400" fill="#253344" >Trip Records (Parquet)</text>
-<text x="56" y="236" font-size="20" font-weight="400" fill="#253344" >24 ไฟล์ จาก Taxi 4 ประเภท</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1450" viewBox="0 0 1280 1450" role="img" aria-labelledby="diagramTitle diagramDescription">
+<title id="diagramTitle">NYC Taxi — Data Flow Diagram</title>
+<desc id="diagramDescription">ข้อมูลเที่ยวรถ Parquet และตารางพื้นที่ CSV ผ่านการตรวจและสรุปก่อน LEFT JOIN โดยเก็บพื้นที่ Unknown ผล curated และ audit ใช้ตรวจคุณภาพ จากนั้นสร้างผลวิเคราะห์และบันทึก SUCCESS หากผิดพลาดจะบันทึก FAILED และรักษาผลสำเร็จเดิม หมายเลข 1 ถึง 7 ตรงกับขั้นตอนใน log</desc>
+<style>text { font-family: "Leelawadee UI", Tahoma, "Noto Sans Thai", sans-serif; }</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9 Z" fill="#58636E"/></marker></defs>
+<rect width="1280" height="1450" fill="#FFFFFF"/>
+<text x="56" y="41" font-size="29" font-weight="600" fill="#25313B" text-anchor="start">NYC Taxi: Data Flow Diagram</text>
+<text x="56" y="75" font-size="20" font-weight="400" fill="#56616B" text-anchor="start">มกราคม–มิถุนายน 2024  กระบวนการ 1–7 ตรงกับลำดับใน log</text>
+<path d="M640 218 V260" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M216 218 V426" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M1064 218 V426" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M555 372 V399 H500 V426" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M725 372 V399 H780 V426" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M316 538 V598" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M920 538 V598" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M1148 598 V538" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M316 706 V734 H490 V762" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M964 706 V734 H790 V762" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M1224 652 H1250 V1068 H344 V1100" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M640 874 V928" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M216 1036 V1100" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M376 1156 H480" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M216 1212 V1274" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)" stroke-dasharray="5 4"/>
+<path d="M800 1156 H904" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M640 1212 V1274" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<path d="M1064 1212 V1274" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"/>
+<g id="zoneSource" data-bounds="56,110,320,108">
+<rect x="56" y="110" width="320" height="108" rx="0" fill="#FFFFFF" stroke="#68737D" stroke-width="1.5"/>
+<text x="72" y="142" font-size="23" font-weight="600" fill="#25313B" text-anchor="start">Taxi Zone Lookup</text>
+<text x="72" y="175" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">CSV จาก NYC TLC</text>
+<text x="72" y="204" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">รหัสและชื่อพื้นที่</text>
 </g>
-<g id="zones" data-bounds="424,128,344,128">
-<rect x="424" y="128" width="344" height="128" rx="0" fill="#F5F7F9" stroke="#7D8D9B" stroke-width="1.5"/>
-<text x="448" y="168" font-size="24" font-weight="600" fill="#253344" >ข้อมูลพื้นที่</text>
-<text x="448" y="208" font-size="20" font-weight="400" fill="#253344" >Taxi Zone Lookup (CSV)</text>
-<text x="448" y="236" font-size="20" font-weight="400" fill="#253344" >265 รหัสพื้นที่</text>
+<g id="configSource" data-bounds="480,110,320,108">
+<rect x="480" y="110" width="320" height="108" rx="0" fill="#FFFFFF" stroke="#68737D" stroke-width="1.5"/>
+<text x="496" y="142" font-size="23" font-weight="600" fill="#25313B" text-anchor="start">การตั้งค่า (JSON)</text>
+<text x="496" y="175" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">config/pipeline.json</text>
+<text x="496" y="204" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">เดือน แหล่งข้อมูล และโฟลเดอร์</text>
 </g>
-<g id="prepare" data-bounds="96,312,608,144">
-<rect x="96" y="312" width="608" height="144" rx="10" fill="#FFFFFF" stroke="#7D8D9B" stroke-width="1.5"/>
-<text x="120" y="352" font-size="26" font-weight="600" fill="#315C7E" >1–3. รับและเตรียมข้อมูล</text>
-<text x="120" y="392" font-size="22" font-weight="400" fill="#253344" >อ่าน config ตรวจไฟล์และคอลัมน์ที่ต้องใช้</text>
-<text x="120" y="420" font-size="22" font-weight="400" fill="#253344" >ตรวจพื้นที่และกฎเวลา แล้วสรุปเที่ยวรถรายวัน</text>
+<g id="tripSource" data-bounds="904,110,320,108">
+<rect x="904" y="110" width="320" height="108" rx="0" fill="#FFFFFF" stroke="#68737D" stroke-width="1.5"/>
+<text x="920" y="142" font-size="23" font-weight="600" fill="#25313B" text-anchor="start">Trip Records</text>
+<text x="920" y="175" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">Parquet จาก NYC TLC</text>
+<text x="920" y="204" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">24 ไฟล์ จาก Taxi 4 ประเภท</text>
 </g>
-<g id="join" data-bounds="96,504,608,136">
-<rect x="96" y="504" width="608" height="136" rx="10" fill="#FFFFFF" stroke="#7D8D9B" stroke-width="1.5"/>
-<text x="120" y="544" font-size="26" font-weight="600" fill="#315C7E" >4. เชื่อมข้อมูลพื้นที่</text>
-<text x="120" y="584" font-size="22" font-weight="400" fill="#253344" >LEFT JOIN ด้วยรหัสพื้นที่รับผู้โดยสาร</text>
-<text x="120" y="612" font-size="22" font-weight="400" fill="#253344" >เที่ยวที่ไม่ทราบพื้นที่ยังนับรวมเป็น Unknown</text>
+<g id="prepare" data-bounds="480,260,320,112">
+<rect x="480" y="260" width="320" height="112" rx="3" fill="#FFFFFF" stroke="#486781" stroke-width="1.5"/>
+<rect x="481" y="261" width="318" height="39" fill="#EEF2F6"/>
+<path d="M480 301 H800" stroke="#BDC9D3" stroke-width="1"/>
+<text x="496" y="292" font-size="23" font-weight="600" fill="#294A65" text-anchor="start">1. เตรียมรายการข้อมูล</text>
+<text x="496" y="329" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">อ่าน config และช่วงเดือน</text>
+<text x="496" y="358" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">สร้างรายการไฟล์ที่จะใช้</text>
 </g>
-<g id="curated" data-bounds="96,688,608,160">
-<rect x="96" y="688" width="608" height="160" rx="0" fill="#EAF1F7" stroke="#315C7E" stroke-width="1.5"/>
-<text x="120" y="728" font-size="26" font-weight="600" fill="#315C7E" >ชุดข้อมูลพร้อมวิเคราะห์ (Curated)</text>
-<text x="120" y="768" font-size="22" font-weight="400" fill="#253344" >daily_zone_counts.parquet</text>
-<text x="120" y="796" font-size="20" font-weight="400" fill="#253344" >สรุปรายวัน × ประเภท Taxi × พื้นที่ × ไฟล์ต้นทาง</text>
-<text x="120" y="824" font-size="20" font-weight="400" fill="#253344" >จำนวนเที่ยวของแต่ละกลุ่มอยู่ใน trip_count</text>
+<g id="lookup" data-bounds="56,426,520,112">
+<rect x="56" y="426" width="520" height="112" rx="3" fill="#FFFFFF" stroke="#486781" stroke-width="1.5"/>
+<rect x="57" y="427" width="518" height="39" fill="#EEF2F6"/>
+<path d="M56 467 H576" stroke="#BDC9D3" stroke-width="1"/>
+<text x="72" y="458" font-size="23" font-weight="600" fill="#294A65" text-anchor="start">2. ตรวจตารางพื้นที่</text>
+<text x="72" y="495" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">รับ/ตรวจ CSV และรหัส LocationID</text>
+<text x="72" y="524" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">ยืนยันว่ารหัสพื้นที่ไม่ซ้ำ</text>
 </g>
-<g id="quality" data-bounds="96,896,608,136">
-<rect x="96" y="896" width="608" height="136" rx="10" fill="#FFFFFF" stroke="#7D8D9B" stroke-width="1.5"/>
-<text x="120" y="936" font-size="26" font-weight="600" fill="#315C7E" >5. ตรวจคุณภาพ 10 เงื่อนไข</text>
-<text x="120" y="976" font-size="22" font-weight="400" fill="#253344" >เทียบยอด curated กับ audit</text>
-<text x="120" y="1004" font-size="22" font-weight="400" fill="#526170" >ไม่ผ่าน: บันทึก FAILED และเก็บผลสำเร็จเดิม</text>
+<g id="trips" data-bounds="704,426,520,112">
+<rect x="704" y="426" width="520" height="112" rx="3" fill="#FFFFFF" stroke="#486781" stroke-width="1.5"/>
+<rect x="705" y="427" width="518" height="39" fill="#EEF2F6"/>
+<path d="M704 467 H1224" stroke="#BDC9D3" stroke-width="1"/>
+<text x="720" y="458" font-size="23" font-weight="600" fill="#294A65" text-anchor="start">3. ตรวจและสรุปเที่ยวรถ</text>
+<text x="720" y="495" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">ตรวจ SHA-256 คอลัมน์ และกฎเวลา</text>
+<text x="720" y="524" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">สรุปรายวันใหม่ หรือใช้ cache ที่ตรงกัน</text>
 </g>
-<g id="analysis" data-bounds="96,1080,608,112">
-<rect x="96" y="1080" width="608" height="112" rx="10" fill="#FFFFFF" stroke="#7D8D9B" stroke-width="1.5"/>
-<text x="120" y="1120" font-size="26" font-weight="600" fill="#315C7E" >6. วิเคราะห์ผล</text>
-<text x="120" y="1160" font-size="22" font-weight="400" fill="#253344" >รวม trip_count เพื่อจัดอันดับและสร้างกราฟ</text>
+<g id="zonesStore" data-bounds="56,598,520,108">
+<rect x="56" y="598" width="520" height="108" fill="#FFFFFF"/>
+<path d="M576 598 H56 V706 H576 M100 598 V706" fill="none" stroke="#68737D" stroke-width="1.5"/>
+<text x="78" y="628" font-size="20" font-weight="600" fill="#25313B" text-anchor="middle">D1</text>
+<text x="116" y="630" font-size="22" font-weight="600" fill="#25313B" text-anchor="start">ตารางพื้นที่ (265 รหัส)</text>
+<text x="116" y="663" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">ตารางชั่วคราวในหน่วยความจำ</text>
+<text x="116" y="692" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">LocationID → Zone / Borough</text>
 </g>
-<g id="publish" data-bounds="96,1240,608,112">
-<rect x="96" y="1240" width="608" height="112" rx="10" fill="#FFFFFF" stroke="#7D8D9B" stroke-width="1.5"/>
-<text x="120" y="1280" font-size="26" font-weight="600" fill="#315C7E" >7. บันทึกผลสำเร็จ</text>
-<text x="120" y="1320" font-size="22" font-weight="400" fill="#253344" >บันทึก SUCCESS และอัปเดต latest.json</text>
+<g id="aggregateStore" data-bounds="704,598,520,108">
+<rect x="704" y="598" width="520" height="108" fill="#FFFFFF"/>
+<path d="M1224 598 H704 V706 H1224 M748 598 V706" fill="none" stroke="#68737D" stroke-width="1.5"/>
+<text x="726" y="628" font-size="20" font-weight="600" fill="#25313B" text-anchor="middle">D2</text>
+<text x="764" y="630" font-size="22" font-weight="600" fill="#25313B" text-anchor="start">ผลสรุปและ audit</text>
+<text x="764" y="663" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">data/cache/</text>
+<text x="764" y="692" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">ยอดรายวันพร้อม raw / valid / rejected</text>
 </g>
-<g id="outputs" data-bounds="96,1400,608,128">
-<rect x="96" y="1400" width="608" height="128" rx="0" fill="#F5F7F9" stroke="#7D8D9B" stroke-width="1.5"/>
-<text x="120" y="1440" font-size="26" font-weight="600" fill="#253344" >ผลลัพธ์ที่ตรวจสอบได้</text>
-<text x="120" y="1480" font-size="20" font-weight="400" fill="#253344" >อันดับ / รายเดือน / พื้นที่ / กราฟ</text>
-<text x="120" y="1508" font-size="20" font-weight="400" fill="#253344" >run.json / pipeline.log / content hash</text>
+<g id="curate" data-bounds="360,762,560,112">
+<rect x="360" y="762" width="560" height="112" rx="3" fill="#FFFFFF" stroke="#486781" stroke-width="1.5"/>
+<rect x="361" y="763" width="558" height="39" fill="#EEF2F6"/>
+<path d="M360 803 H920" stroke="#BDC9D3" stroke-width="1"/>
+<text x="376" y="794" font-size="23" font-weight="600" fill="#294A65" text-anchor="start">4. เชื่อมข้อมูลพื้นที่</text>
+<text x="376" y="831" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">LEFT JOIN ด้วย pickup_location_id</text>
+<text x="376" y="860" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">เก็บเที่ยวที่ไม่มีพื้นที่เป็น Unknown</text>
 </g>
-<text x="416" y="1064" font-size="18" font-weight="400" fill="#526170" data-edge-label="quality:analysis">ผ่านตรวจ</text>
+<g id="curatedStore" data-bounds="56,928,1168,108">
+<rect x="56" y="928" width="1168" height="108" fill="#FFFFFF"/>
+<path d="M1224 928 H56 V1036 H1224 M100 928 V1036" fill="none" stroke="#68737D" stroke-width="1.5"/>
+<text x="78" y="958" font-size="20" font-weight="600" fill="#25313B" text-anchor="middle">D3</text>
+<text x="116" y="960" font-size="22" font-weight="600" fill="#25313B" text-anchor="start">ชุดข้อมูลสรุป (Curated)</text>
+<text x="116" y="993" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">daily_zone_counts.parquet</text>
+<text x="116" y="1022" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">วัน × ประเภท Taxi × พื้นที่รับผู้โดยสาร × ไฟล์ต้นทาง; จำนวนเที่ยวอยู่ใน trip_count</text>
+</g>
+<g id="quality" data-bounds="56,1100,320,112">
+<rect x="56" y="1100" width="320" height="112" rx="3" fill="#FFFFFF" stroke="#486781" stroke-width="1.5"/>
+<rect x="57" y="1101" width="318" height="39" fill="#EEF2F6"/>
+<path d="M56 1141 H376" stroke="#BDC9D3" stroke-width="1"/>
+<text x="72" y="1132" font-size="23" font-weight="600" fill="#294A65" text-anchor="start">5. ตรวจคุณภาพ</text>
+<text x="72" y="1169" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">เทียบ curated กับ audit</text>
+<text x="72" y="1198" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">ตรวจครบ 10 เงื่อนไข</text>
+</g>
+<g id="analysis" data-bounds="480,1100,320,112">
+<rect x="480" y="1100" width="320" height="112" rx="3" fill="#FFFFFF" stroke="#486781" stroke-width="1.5"/>
+<rect x="481" y="1101" width="318" height="39" fill="#EEF2F6"/>
+<path d="M480 1141 H800" stroke="#BDC9D3" stroke-width="1"/>
+<text x="496" y="1132" font-size="23" font-weight="600" fill="#294A65" text-anchor="start">6. วิเคราะห์ผล</text>
+<text x="496" y="1169" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">รวมยอดจาก curated</text>
+<text x="496" y="1198" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">จัดอันดับและสร้างกราฟ</text>
+</g>
+<g id="publish" data-bounds="904,1100,320,112">
+<rect x="904" y="1100" width="320" height="112" rx="3" fill="#FFFFFF" stroke="#486781" stroke-width="1.5"/>
+<rect x="905" y="1101" width="318" height="39" fill="#EEF2F6"/>
+<path d="M904 1141 H1224" stroke="#BDC9D3" stroke-width="1"/>
+<text x="920" y="1132" font-size="23" font-weight="600" fill="#294A65" text-anchor="start">7. บันทึกผลสำเร็จ</text>
+<text x="920" y="1169" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">คำนวณ content hash</text>
+<text x="920" y="1198" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">อัปเดต latest.json</text>
+</g>
+<g id="failed" data-bounds="56,1274,320,108">
+<rect x="56" y="1274" width="320" height="108" rx="0" fill="#FFFFFF" stroke="#68737D" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="72" y="1306" font-size="23" font-weight="600" fill="#25313B" text-anchor="start">FAILED</text>
+<text x="72" y="1339" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">บันทึกข้อผิดพลาดใน log</text>
+<text x="72" y="1368" font-size="22" font-weight="400" fill="#25313B" text-anchor="start">คง latest.json ของรอบก่อน</text>
+</g>
+<g id="resultStore" data-bounds="480,1274,320,108">
+<rect x="480" y="1274" width="320" height="108" fill="#FFFFFF"/>
+<path d="M800 1274 H480 V1382 H800 M524 1274 V1382" fill="none" stroke="#68737D" stroke-width="1.5"/>
+<text x="502" y="1304" font-size="20" font-weight="600" fill="#25313B" text-anchor="middle">D4</text>
+<text x="540" y="1306" font-size="22" font-weight="600" fill="#25313B" text-anchor="start">ผลวิเคราะห์</text>
+<text x="540" y="1339" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">อันดับ / รายเดือน / พื้นที่</text>
+<text x="540" y="1368" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">กราฟ และ CSV ตัวอย่าง</text>
+</g>
+<g id="successStore" data-bounds="904,1274,320,108">
+<rect x="904" y="1274" width="320" height="108" fill="#FFFFFF"/>
+<path d="M1224 1274 H904 V1382 H1224 M948 1274 V1382" fill="none" stroke="#68737D" stroke-width="1.5"/>
+<text x="926" y="1304" font-size="20" font-weight="600" fill="#25313B" text-anchor="middle">D5</text>
+<text x="964" y="1306" font-size="22" font-weight="600" fill="#25313B" text-anchor="start">ผลรันล่าสุดในเครื่อง</text>
+<text x="964" y="1339" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">สถานะใน run.json</text>
+<text x="964" y="1368" font-size="21" font-weight="400" fill="#25313B" text-anchor="start">latest.json ชี้รอบสำเร็จ</text>
+</g>
+<rect x="153.0" y="308" width="126" height="26" fill="#FFFFFF"/>
+<text x="216" y="327" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">CSV พื้นที่</text>
+<rect x="991.0" y="308" width="146" height="26" fill="#FFFFFF"/>
+<text x="1064" y="327" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">ข้อมูลเที่ยวรถ</text>
+<rect x="361.0" y="395" width="128" height="26" fill="#FFFFFF"/>
+<text x="425" y="414" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">URL พื้นที่</text>
+<rect x="791.0" y="395" width="138" height="26" fill="#FFFFFF"/>
+<text x="860" y="414" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">รายการไฟล์</text>
+<rect x="231.0" y="554" width="170" height="26" fill="#FFFFFF"/>
+<text x="316" y="573" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">lookup ผ่านตรวจ</text>
+<rect x="831.0" y="554" width="178" height="26" fill="#FFFFFF"/>
+<text x="920" y="573" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">บันทึกผลคำนวณ</text>
+<rect x="1074.0" y="554" width="148" height="26" fill="#FFFFFF"/>
+<text x="1148" y="573" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">cache ตรงกัน</text>
+<rect x="332.0" y="730" width="136" height="26" fill="#FFFFFF"/>
+<text x="400" y="749" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">ข้อมูลพื้นที่</text>
+<rect x="817.0" y="730" width="136" height="26" fill="#FFFFFF"/>
+<text x="885" y="749" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">ยอดรายวัน</text>
+<rect x="903.0" y="1055" width="254" height="26" fill="#FFFFFF"/>
+<text x="1030" y="1074" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">raw / valid / rejected</text>
+<rect x="704.0" y="888" width="232" height="26" fill="#FFFFFF"/>
+<text x="820" y="907" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">ข้อมูลหลังเชื่อมพื้นที่</text>
+<rect x="161.0" y="1055" width="110" height="26" fill="#FFFFFF"/>
+<text x="216" y="1074" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">curated</text>
+<rect x="391.0" y="1128" width="74" height="26" fill="#FFFFFF"/>
+<text x="428" y="1147" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">ผ่าน</text>
+<rect x="164.0" y="1230" width="104" height="26" fill="#FFFFFF"/>
+<text x="216" y="1249" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">ไม่ผ่าน</text>
+<rect x="810.0" y="1128" width="84" height="26" fill="#FFFFFF"/>
+<text x="852" y="1147" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">รายงาน</text>
+<rect x="565.0" y="1230" width="150" height="26" fill="#FFFFFF"/>
+<text x="640" y="1249" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">ตาราง / กราฟ</text>
+<rect x="1002.0" y="1230" width="124" height="26" fill="#FFFFFF"/>
+<text x="1064" y="1249" font-size="19" font-weight="400" fill="#3E4B57" text-anchor="middle">สถานะรัน</text>
+<text x="56" y="1428" font-size="20" font-weight="400" fill="#56616B" text-anchor="start">หากขั้นอื่นเกิดข้อผิดพลาด ระบบจะบันทึก FAILED และคงผลสำเร็จรอบก่อนเช่นกัน</text>
 </svg>
