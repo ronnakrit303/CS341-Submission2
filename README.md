@@ -18,7 +18,7 @@ Repository นี้รวบรวมไฟล์ที่ใช้รัน pi
 |---|---|---|
 | 1 | Source code / workflow ที่ใช้จริง | [คำสั่งเริ่มรัน](run_pipeline.py), [โค้ดแต่ละส่วนของ pipeline](taxi_pipeline/), [config](config/pipeline.json) และ [workflow ทดสอบบน GitHub Actions](.github/workflows/ci.yml) |
 | 2 | README อธิบายข้อมูล โครงสร้าง pipeline วิธีติดตั้ง และวิธีรัน | อ่านหัวข้อ [ข้อมูลที่ใช้](#ข้อมูลและกฎที่ใช้), [ขั้นตอนของ pipeline](#pipeline-ทำอะไรบ้าง), [โครงสร้างโปรเจกต์](#โครงสร้างโปรเจกต์), [การติดตั้ง](#ติดตั้ง) และ [การรันข้อมูลจริง](#รัน-pipeline-กับข้อมูลจริง) ในหน้านี้ |
-| 3 | Pipeline / Data Flow Diagram | มี [แผนภาพใน README](#pipeline-ทำอะไรบ้าง) และ [ไฟล์ต้นฉบับของแผนภาพ](docs/pipeline.mmd) แสดงการรับข้อมูล ตรวจสอบ สรุป เชื่อมพื้นที่ และสร้างผลวิเคราะห์ |
+| 3 | Pipeline / Data Flow Diagram | มี [Data Flow Diagram ใน README](#data-flow-diagram), [ภาพ SVG](docs/images/pipeline-data-flow.svg) และ [ฉบับ Mermaid](docs/pipeline.mmd) แสดงข้อมูลที่ส่งระหว่างการรับข้อมูล ตรวจสอบ สรุป เชื่อมพื้นที่ และสร้างผลวิเคราะห์ |
 | 4 | หลักฐานการรัน pipeline และสถานะการทำงาน | [สถานะและ log แต่ละรอบ](artifacts/runs/) มี `run.json`, `pipeline.log` และ `events.jsonl` ส่วน [reproducibility.json](artifacts/reproducibility.json) ระบุรอบคำนวณใหม่และรอบใช้ cache ที่ได้ผลตรงกัน |
 | 5 | ตัวอย่างชุดข้อมูลพร้อมใช้สำหรับการวิเคราะห์ | [CSV ตัวอย่าง 200 แถว](artifacts/curated/sample_daily_zone_counts.csv), [curated Parquet ฉบับเต็ม 153,662 แถว](artifacts/curated/daily_zone_counts.parquet) และ [คำอธิบายคอลัมน์](docs/data_dictionary.md) |
 | 6 | ผลของการตรวจสอบคุณภาพข้อมูล | [Quality report](artifacts/quality/quality.json) ผ่าน 10 ข้อ พร้อม [audit รายไฟล์](artifacts/quality/file_audit.csv) สำหรับตรวจยอดข้อมูลดิบ ข้อมูลที่ผ่านกฎ และข้อมูลที่คัดออก |
@@ -167,27 +167,25 @@ python run_pipeline.py --start-month 2024-01 --end-month 2024-07
 | 6/7 | ANALYSIS | สร้างอันดับ ตารางรายเดือน ตารางพื้นที่ กราฟ และตัวอย่าง CSV |
 | 7/7 | PUBLISH | บันทึกสถานะสำเร็จและตำแหน่งผลลัพธ์ล่าสุดในเครื่อง |
 
-```mermaid
-flowchart TD
-    config["JSON config and source manifest"] --> download["Atomic download, metadata and SHA-256"]
-    trips["TLC Trip Records: 24 Parquet files"] --> download
-    download --> raw["Verified local raw snapshot"]
-    raw --> transform["Schema checks, time-rule audit and daily aggregation"]
-    transform --> cache["Content-keyed aggregate partitions"]
-    zones["Taxi Zone Lookup: CSV"] --> lookup["Validate unique zone keys"]
-    lookup --> join["LEFT JOIN pickup zone, retain unknowns"]
-    cache --> join
-    join --> curated["Curated daily counts: Parquet and sample CSV"]
-    curated --> quality["Quality gates and reconciliation"]
-    quality -->|"PASS"| analysis["Ranking, monthly and borough analysis, chart"]
-    analysis --> success["SUCCESS and atomic latest pointer"]
-    transform -->|"error"| failed["FAILED evidence, previous success retained"]
-    lookup -->|"error"| failed
-    quality -->|"FAIL"| failed
-    success --> evidence["Export two-run evidence for GitHub"]
-```
+### Data Flow Diagram
 
-มี [ไฟล์ต้นฉบับของแผนภาพ](docs/pipeline.mmd) แยกไว้สำหรับเปิดดูหรือแก้ไข
+แผนภาพนี้แสดงว่าข้อมูลเที่ยวรถและตารางพื้นที่ไหลมารวมกันอย่างไร ก่อนตรวจคุณภาพ สร้างผลวิเคราะห์ และบันทึกผลสำเร็จ หมายเลข **01–07** ตรงกับขั้นตอนใน log โดยระบบรันตามลำดับในตารางด้านบน ส่วนลูกศรในภาพระบุข้อมูลที่ส่งต่อระหว่างส่วน
+
+![Data Flow Diagram ของ NYC Taxi: รับ Parquet และ CSV ตรวจและสรุปข้อมูล เชื่อมพื้นที่ เก็บ curated ตรวจคุณภาพ วิเคราะห์ และบันทึกสถานะ พร้อมทางใช้ cache และทาง FAILED](docs/images/pipeline-data-flow.svg)
+
+[เปิดภาพขนาดเต็ม](docs/images/pipeline-data-flow.svg) · [เปิดฉบับ Mermaid](docs/pipeline.mmd)
+
+- **สีฟ้า:** ข้อมูลต้นทางและไฟล์ตั้งค่า / **สีม่วง:** ขั้นประมวลผล / **สีเขียว:** ข้อมูลที่จัดเก็บ โดยใช้รูปทรงกระบอกและรหัส D1–D5 กำกับ
+- **สีเหลือง:** ตรวจคุณภาพ โดยเทียบ curated กับ audit รายไฟล์ ก่อนส่งต่อผลที่ผ่านไปวิเคราะห์
+- **สีแดงและเส้นประ:** กรณีตรวจไม่ผ่าน ส่วนข้อผิดพลาดในขั้นอื่นใช้หลักเดียวกัน คือบันทึก FAILED และเก็บผลสำเร็จเดิมไว้
+
+ลูกศรจาก D2 กลับไป TRIPS แสดงการใช้ cache เมื่อข้อมูลและเงื่อนไขตรงกัน ส่วนเส้น audit จาก D2 ไป QUALITY ใช้เทียบยอด `raw / valid / rejected` กับจำนวนเที่ยวใน curated การส่งออกหลักฐานไปยัง GitHub ทำแยกหลัง pipeline สำเร็จ
+
+หากต้องการแก้ข้อความ สี หรือตำแหน่งกล่อง ให้แก้ [สคริปต์สร้างแผนภาพ](scripts/render_pipeline_diagram.py) แล้วรันคำสั่งนี้เพื่อสร้าง SVG และ Mermaid จากข้อมูลชุดเดียวกัน โดยใช้ Python มาตรฐาน:
+
+```bash
+python scripts/render_pipeline_diagram.py
+```
 
 ### อ่านสถานะจาก log
 
@@ -344,6 +342,6 @@ Notebook เดิม `6709650607_Submission_1_CS341.ipynb` เก็บไว�
 | รันซ้ำหรืออัปเดตข้อมูลใหม่ | 15 | [โค้ดควบคุม pipeline](taxi_pipeline/pipeline.py), [หลักฐานสองรอบ](artifacts/reproducibility.json), [tests](tests/test_pipeline.py) |
 | ตรวจคุณภาพและแสดงสถานะ | 15 | [quality report](artifacts/quality/quality.json), [audit](artifacts/quality/file_audit.csv), [log การรันจริง](artifacts/runs/) |
 | บูรณาการเพื่อสร้างตัวชี้วัด | 15 | [โค้ดสร้างรายงาน](taxi_pipeline/report.py), [อันดับ](artifacts/results/ranking.csv), [ผลรายเดือน](artifacts/results/monthly_counts.csv) |
-| นำเสนอและตรวจสอบย้อนกลับ | 15 | [ผลวิเคราะห์](artifacts/results/analysis.md), [แผนภาพ](docs/pipeline.mmd), [การออกแบบ](docs/design.md), [การเทียบ baseline](docs/baseline_comparison.md), [ตัวตรวจหลักฐาน](scripts/verify_artifacts.py) |
+| นำเสนอและตรวจสอบย้อนกลับ | 15 | [ผลวิเคราะห์](artifacts/results/analysis.md), [Data Flow Diagram](docs/images/pipeline-data-flow.svg), [การออกแบบ](docs/design.md), [การเทียบ baseline](docs/baseline_comparison.md), [ตัวตรวจหลักฐาน](scripts/verify_artifacts.py) |
 
 ส่งลิงก์ repository ผ่าน [แบบฟอร์ม Submission 2](https://forms.gle/9cTHMWrAKyXsm8Ud7) ตามขั้นตอนของรายวิชา
