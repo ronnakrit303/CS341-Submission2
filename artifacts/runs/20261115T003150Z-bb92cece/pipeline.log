@@ -1,0 +1,206 @@
+============================================================================
+NYC TAXI DATA PIPELINE
+Run ID : 20261115T003150Z-bb92cece
+Period : 2024-01 to 2024-06
+Mode   : OFFLINE: ใช้ snapshot ในเครื่อง ไม่ดาวน์โหลดข้อมูล
+Work   : CACHE: ใช้ audit/aggregate เดิมเมื่อ input และกฎตรงกัน
+Inputs : 24 trip files (Parquet) + 1 zone lookup (CSV)
+Flow   : 7 steps
+  1. PREPARE - เตรียมระบบและรายการข้อมูล
+     ↓
+  2. LOOKUP - รับและตรวจสอบตารางพื้นที่ Taxi Zone
+     ↓
+  3. TRIPS - รับ ตรวจสอบ และสรุปข้อมูล Trip Records
+     ↓
+  4. CURATED - เชื่อมข้อมูลพื้นที่และสร้าง Curated Output
+     ↓
+  5. QUALITY - ตรวจคุณภาพและความสอดคล้องของข้อมูล
+     ↓
+  6. ANALYSIS - วิเคราะห์ จัดอันดับ และสร้างรายงาน
+     ↓
+  7. PUBLISH - บันทึกผลสำเร็จและตำแหน่ง Output
+Status : RUNNING=กำลังทำ | OK=สำเร็จ | WARN=ข้อควรทราบ | FAILED=ล้มเหลว | SKIPPED=ไม่ได้ทำ
+============================================================================
+
+[STEP 01/07] [RUNNING] PREPARE - เตรียมระบบและรายการข้อมูล
+  [INFO] Manifest: 4 taxi types x 6 months = 24 trip files
+[STEP 01/07] [OK] ระบบพร้อม รายการข้อมูลครบ และสร้าง run directory แล้ว (0.02s)
+
+        ↓
+
+[STEP 02/07] [RUNNING] LOOKUP - รับและตรวจสอบตารางพื้นที่ Taxi Zone
+  [INFO] ตรวจ raw snapshot ของ CSV (SHA-256); ดาวน์โหลดตาม mode หากจำเป็น
+  [INFO] ใช้ CSV เดิมหลังตรวจ hash ผ่าน; ตรวจคอลัมน์และ LocationID ที่ไม่ซ้ำ
+[STEP 02/07] [OK] ตารางพื้นที่ผ่านการตรวจสอบ 265 unique zones (0.02s)
+
+        ↓
+
+[STEP 03/07] [RUNNING] TRIPS - รับ ตรวจสอบ และสรุปข้อมูล Trip Records
+  [INFO] แต่ละไฟล์: ตรวจ/รับ input -> ตรวจ cache -> คำนวณ audit และ daily aggregate เมื่อจำเป็น
+  [FILE 01/24] [INPUT] [RUNNING] yellow_tripdata_2024-01.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 01/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 47.65 MiB
+  [FILE 01/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 01/24] [TRANSFORM] [OK] REUSED | raw=2,964,624 | valid=2,964,553 | rejected=71 | 0.06s
+  [FILE 02/24] [INPUT] [RUNNING] yellow_tripdata_2024-02.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 02/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 48.02 MiB
+  [FILE 02/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 02/24] [TRANSFORM] [OK] REUSED | raw=3,007,526 | valid=3,007,517 | rejected=9 | 0.06s
+  [FILE 03/24] [INPUT] [RUNNING] yellow_tripdata_2024-03.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 03/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 57.30 MiB
+  [FILE 03/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 03/24] [TRANSFORM] [OK] REUSED | raw=3,582,628 | valid=3,582,509 | rejected=119 | 0.07s
+  [FILE 04/24] [INPUT] [RUNNING] yellow_tripdata_2024-04.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 04/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 56.39 MiB
+  [FILE 04/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 04/24] [TRANSFORM] [OK] REUSED | raw=3,514,289 | valid=3,514,215 | rejected=74 | 0.07s
+  [FILE 05/24] [INPUT] [RUNNING] yellow_tripdata_2024-05.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 05/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 59.66 MiB
+  [FILE 05/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 05/24] [TRANSFORM] [OK] REUSED | raw=3,723,833 | valid=3,723,784 | rejected=49 | 0.07s
+  [FILE 06/24] [INPUT] [RUNNING] yellow_tripdata_2024-06.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 06/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 57.09 MiB
+  [FILE 06/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 06/24] [TRANSFORM] [OK] REUSED | raw=3,539,193 | valid=3,539,176 | rejected=17 | 0.06s
+  [FILE 07/24] [INPUT] [RUNNING] green_tripdata_2024-01.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 07/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 1.30 MiB
+  [FILE 07/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 07/24] [TRANSFORM] [OK] REUSED | raw=56,551 | valid=56,549 | rejected=2 | 0.01s
+  [FILE 08/24] [INPUT] [RUNNING] green_tripdata_2024-02.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 08/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 1.22 MiB
+  [FILE 08/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 08/24] [TRANSFORM] [OK] REUSED | raw=53,577 | valid=53,577 | rejected=0 | 0.01s
+  [FILE 09/24] [INPUT] [RUNNING] green_tripdata_2024-03.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 09/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 1.31 MiB
+  [FILE 09/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 09/24] [TRANSFORM] [OK] REUSED | raw=57,457 | valid=57,455 | rejected=2 | 0.02s
+  [FILE 10/24] [INPUT] [RUNNING] green_tripdata_2024-04.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 10/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 1.28 MiB
+  [FILE 10/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 10/24] [TRANSFORM] [OK] REUSED | raw=56,471 | valid=56,471 | rejected=0 | 0.02s
+  [FILE 11/24] [INPUT] [RUNNING] green_tripdata_2024-05.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 11/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 1.39 MiB
+  [FILE 11/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 11/24] [TRANSFORM] [OK] REUSED | raw=61,003 | valid=61,001 | rejected=2 | 0.02s
+  [FILE 12/24] [INPUT] [RUNNING] green_tripdata_2024-06.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 12/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 1.26 MiB
+  [FILE 12/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 12/24] [TRANSFORM] [OK] REUSED | raw=54,748 | valid=54,748 | rejected=0 | 0.01s
+  [FILE 13/24] [INPUT] [RUNNING] fhv_tripdata_2024-01.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 13/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 14.33 MiB
+  [FILE 13/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 13/24] [TRANSFORM] [OK] REUSED | raw=1,290,116 | valid=1,290,116 | rejected=0 | 0.03s
+  [FILE 14/24] [INPUT] [RUNNING] fhv_tripdata_2024-02.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 14/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 12.98 MiB
+  [FILE 14/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 14/24] [TRANSFORM] [OK] REUSED | raw=1,176,093 | valid=1,176,093 | rejected=0 | 0.03s
+  [FILE 15/24] [INPUT] [RUNNING] fhv_tripdata_2024-03.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 15/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 15.97 MiB
+  [FILE 15/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 15/24] [TRANSFORM] [OK] REUSED | raw=1,469,352 | valid=1,469,352 | rejected=0 | 0.03s
+  [FILE 16/24] [INPUT] [RUNNING] fhv_tripdata_2024-04.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 16/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 15.75 MiB
+  [FILE 16/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 16/24] [TRANSFORM] [OK] REUSED | raw=1,444,626 | valid=1,444,626 | rejected=0 | 0.03s
+  [FILE 17/24] [INPUT] [RUNNING] fhv_tripdata_2024-05.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 17/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 15.22 MiB
+  [FILE 17/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 17/24] [TRANSFORM] [OK] REUSED | raw=1,352,502 | valid=1,352,502 | rejected=0 | 0.03s
+  [FILE 18/24] [INPUT] [RUNNING] fhv_tripdata_2024-06.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 18/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 15.29 MiB
+  [FILE 18/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 18/24] [TRANSFORM] [OK] REUSED | raw=1,386,539 | valid=1,386,539 | rejected=0 | 0.03s
+  [FILE 19/24] [INPUT] [RUNNING] fhvhv_tripdata_2024-01.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 19/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 450.86 MiB
+  [FILE 19/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 19/24] [TRANSFORM] [OK] REUSED | raw=19,663,930 | valid=19,663,930 | rejected=0 | 0.41s
+  [FILE 20/24] [INPUT] [RUNNING] fhvhv_tripdata_2024-02.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 20/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 441.05 MiB
+  [FILE 20/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 20/24] [TRANSFORM] [OK] REUSED | raw=19,359,148 | valid=19,359,148 | rejected=0 | 0.41s
+  [FILE 21/24] [INPUT] [RUNNING] fhvhv_tripdata_2024-03.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 21/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 484.41 MiB
+  [FILE 21/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 21/24] [TRANSFORM] [OK] REUSED | raw=21,280,788 | valid=21,280,788 | rejected=0 | 0.46s
+  [FILE 22/24] [INPUT] [RUNNING] fhvhv_tripdata_2024-04.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 22/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 454.06 MiB
+  [FILE 22/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 22/24] [TRANSFORM] [OK] REUSED | raw=19,733,038 | valid=19,733,038 | rejected=0 | 0.41s
+  [FILE 23/24] [INPUT] [RUNNING] fhvhv_tripdata_2024-05.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 23/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 475.48 MiB
+  [FILE 23/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 23/24] [TRANSFORM] [OK] REUSED | raw=20,704,538 | valid=20,704,538 | rejected=0 | 0.42s
+  [FILE 24/24] [INPUT] [RUNNING] fhvhv_tripdata_2024-06.parquet | ตรวจ snapshot/SHA-256 หรือดาวน์โหลดตาม mode
+  [FILE 24/24] [INPUT] [OK] ใช้ไฟล์เดิมหลังตรวจ SHA-256 ผ่าน | 461.98 MiB
+  [FILE 24/24] [TRANSFORM] [RUNNING] ตรวจ aggregate cache; คำนวณ schema checks/audit/aggregate ใหม่เมื่อจำเป็น
+  [FILE 24/24] [TRANSFORM] [OK] REUSED | raw=20,123,226 | valid=20,123,226 | rejected=0 | 0.42s
+[STEP 03/07] [OK] Trip files ครบ 24/24 | processed=0 | reused=24 (3.18s)
+
+        ↓
+
+[STEP 04/07] [RUNNING] CURATED - เชื่อมข้อมูลพื้นที่และสร้าง Curated Output
+  [INFO] รวม daily aggregates และ LEFT JOIN ตารางพื้นที่ โดยเก็บ missing/unmapped zones ไว้
+  [INFO] เขียน data/curated/20261115T003150Z-bb92cece/daily_zone_counts.parquet
+[STEP 04/07] [OK] Curated output พร้อม: 153,662 rows | 149,655,451 trip records (0.17s)
+
+        ↓
+
+[STEP 05/07] [RUNNING] QUALITY - ตรวจคุณภาพและความสอดคล้องของข้อมูล
+  [PASS] ข้อมูลครบทุกประเภท/เดือน และไม่มีรายการไฟล์ซ้ำ
+  [PASS] คอลัมน์ที่จำเป็นครบ และทุกไฟล์มีข้อมูล
+  [PASS] แต่ละไฟล์แจกแจงเหตุผลคัดออกได้ครบโดยไม่นับซ้ำ
+  [PASS] จำนวนข้อมูลทั้งหมด = ผ่านกฎ + คัดออก
+  [PASS] มีข้อมูลที่ผ่านกฎสำหรับนำไปวิเคราะห์
+  [PASS] จำนวนเที่ยวใน curated ตรงกับยอดที่ผ่านกฎ
+  [PASS] การเชื่อมพื้นที่ไม่ทำให้จำนวนเที่ยวเพิ่มหรือลด
+  [PASS] กลุ่มสรุปใน curated ไม่มี key ซ้ำ
+  [PASS] ทุกกลุ่มสรุปมีจำนวนเที่ยวมากกว่าศูนย์
+  [PASS] วันที่ใน curated อยู่ภายในช่วงที่กำหนด
+  [WARN] FHV: 6,359,783 records มี zone=missing และยังนับรวมใน metric
+  [INFO] คัดออกตามกฎเวลา 345 records | source-month mismatch=148 (diagnostic)
+[STEP 05/07] [OK] Quality PASS 10/10 gates | valid=149,655,451 | rejected=345 (0.01s)
+
+        ↓
+
+[STEP 06/07] [RUNNING] ANALYSIS - วิเคราะห์ จัดอันดับ และสร้างรายงาน
+  [INFO] รวมจำนวนจาก curated data เพื่อสร้างอันดับ สัดส่วน ตารางรายเดือน/พื้นที่ และกราฟ
+  [INFO] Rank 1 | High Volume FHV | 120,864,668 valid records | 80.76%
+  [INFO] Rank 2 | Yellow | 20,331,754 valid records | 13.59%
+  [INFO] Rank 3 | FHV | 8,119,228 valid records | 5.43%
+  [INFO] Rank 4 | Green | 339,801 valid records | 0.23%
+[STEP 06/07] [OK] สร้างรายงานและกราฟแล้ว | Winner(s): High Volume FHV (0.20s)
+
+        ↓
+
+[STEP 07/07] [RUNNING] PUBLISH - บันทึกผลสำเร็จและตำแหน่ง Output
+  [INFO] คำนวณ checksums ของ curated output และเตรียมบันทึกสถานะรัน
+[STEP 07/07] [OK] บันทึก SUCCESS และอัปเดต latest pointer สำเร็จ (0.13s)
+
+============================================================================
+[PIPELINE] [SUCCESS] สำเร็จครบ 7/7 ขั้นตอน
+Step  Status    Seconds  Name
+01/07 OK           0.02  PREPARE
+02/07 OK           0.02  LOOKUP
+03/07 OK           3.18  TRIPS
+04/07 OK           0.17  CURATED
+05/07 OK           0.01  QUALITY
+06/07 OK           0.20  ANALYSIS
+07/07 OK           0.13  PUBLISH
+Run ID       : 20261115T003150Z-bb92cece
+Elapsed      : 3.78s
+Raw records  : 149,655,796
+Valid records: 149,655,451
+Rejected     : 345 (คัดออกตามกฎข้อมูล ไม่ใช่ pipeline error)
+Curated rows : 153,662
+Winner(s)    : High Volume FHV
+Trip inputs  : downloaded=0 | verified local=24
+Transforms   : processed=0 | reused=24
+Outputs (paths relative to project root):
+  Curated      : data/curated/20261115T003150Z-bb92cece/daily_zone_counts.parquet
+  CSV sample   : data/curated/20261115T003150Z-bb92cece/sample_daily_zone_counts.csv
+  Analysis     : reports/runs/20261115T003150Z-bb92cece/analysis.md
+  Chart        : reports/runs/20261115T003150Z-bb92cece/taxi_usage.png
+  Quality      : reports/runs/20261115T003150Z-bb92cece/quality.json
+  Readable log : reports/runs/20261115T003150Z-bb92cece/pipeline.log
+  Events       : reports/runs/20261115T003150Z-bb92cece/events.jsonl
+  Latest       : reports/latest.json
+============================================================================

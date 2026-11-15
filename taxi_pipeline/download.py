@@ -24,11 +24,25 @@ def sha256_file(path: Path) -> str:
     return result.hexdigest()
 
 
+def atomic_replace(temporary: Path, target: Path):
+    """Publish a complete file, allowing brief Windows access/sharing locks."""
+    for attempt in range(7):
+        try:
+            temporary.replace(target)
+            return
+        except OSError as exc:
+            # Windows readers/scanners may briefly deny replacement after close.
+            # Keep the previous target intact; permanent errors must still fail.
+            if getattr(exc, "winerror", None) not in (5, 32, 33) or attempt == 6:
+                raise
+            time.sleep(0.05 * 2**attempt)
+
+
 def write_json(path: Path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + ".part")
     temporary.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    temporary.replace(path)
+    atomic_replace(temporary, path)
 
 
 def read_json(path: Path):
@@ -87,7 +101,7 @@ class Downloader:
                     raise RuntimeError("Downloaded an empty file")
                 metadata = {"url": url, "bytes": temporary.stat().st_size,
                             "sha256": sha256_file(temporary), "retrieved_at_utc": utc_now(), **remote}
-                temporary.replace(target)
+                atomic_replace(temporary, target)
                 write_json(metadata_path, metadata)
                 return {**metadata, "download_action": "downloaded"}
             except Exception:

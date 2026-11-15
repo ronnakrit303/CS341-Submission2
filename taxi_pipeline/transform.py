@@ -4,7 +4,7 @@ from pathlib import Path
 
 from . import RULES_VERSION
 from .config import digest_json
-from .download import read_json, sha256_file, write_json
+from .download import atomic_replace, read_json, sha256_file, write_json
 
 
 class QualityError(RuntimeError):
@@ -141,7 +141,7 @@ def transform_file(con, source: Path, item: dict, config, input_hash: str, rebui
         GROUP BY pickup_date, pickup_location_id
         ORDER BY pickup_date, pickup_location_id NULLS LAST
         ) TO {sql_text(temporary)} (FORMAT PARQUET, COMPRESSION ZSTD)''')
-    temporary.replace(aggregate)
+    atomic_replace(temporary, aggregate)
     aggregate_count = con.execute(f"SELECT COALESCE(SUM(trip_count), 0) FROM read_parquet({sql_text(aggregate)})").fetchone()[0]
     if aggregate_count != audit["valid_count"]:
         raise QualityError(f"Aggregate count does not match audit: {item['source_file']}")
