@@ -144,6 +144,7 @@ taxi_pipeline/               Config, download, transform, orchestration, reports
 baseline/expected_counts.json Saved baseline counts for comparison only
 6709650607_...ipynb           Original Submission 1 notebook, unchanged
 tests/                       Offline tests using small Parquet/CSV fixtures
+conftest.py                  Isolated per-invocation test temp directory
 .github/workflows/ci.yml      GitHub Actions: install and run offline tests
 scripts/export_evidence.py    Export completed real runs for review
 scripts/verify_artifacts.py   Verify snapshot hashes and recompute its totals
@@ -190,6 +191,8 @@ print(con.execute("""
 [reproducibility.json](artifacts/reproducibility.json) ระบุ full-data run และ unchanged rerun จริงของโค้ดรุ่นปัจจุบัน ทั้งคู่ได้ counts และ canonical curated-content hash เดียวกัน หลักฐานรุ่น log ใหม่รันครั้งแรกด้วย `--offline --rebuild` เพื่อคำนวณข้อมูลจริงครบ 24 ไฟล์จาก raw snapshot เดิมอีกครั้ง แล้ว rerun ด้วย `--offline` เพื่อ reuse partitions ครบ 24 ไฟล์ ไม่ดาวน์โหลดหลาย GB ซ้ำ แต่ละรันมี config, code hashes, dependency versions และเวลาที่ใช้จริงใน [`artifacts/runs/`](artifacts/runs/) ซึ่งยังเก็บหลักฐานรอบแรกที่ดาวน์โหลดจริงไว้เป็นประวัติด้วย เวลาใน event logs เป็น UTC; บวก 7 ชั่วโมงเมื่อต้องการเวลาไทย ไม่ควรใช้เวลาเหล่านี้อ้าง performance ของทุกเครื่อง
 
 ทดสอบ offline ด้วย `python -m pytest -q` ครอบคลุม schema 4 ประเภท, missing/invalid times, count reconciliation, unknown/NULL zones, duplicate lookup keys, input changes/new month, repeat equivalence, corrupt cache, failed-run publication, lock และ exported-evidence verification GitHub Actions ทดสอบด้วย fixtures เล็ก ไม่ดาวน์โหลดชุดข้อมูลเต็มทุก push จึงแยก **CI tests** ออกจาก **full-data execution evidence** อย่างชัดเจน
+
+ใช้ `python -m pytest -v` เมื่อต้องการดูผลราย test โฟลเดอร์ชั่วคราวของ tests จะอยู่ใน `tmp/pytest-runs/<รหัสเฉพาะรอบ>/` ภายในโปรเจกต์ โดย `conftest.py` เลือก directory ใหม่ทุกรันเพื่อหลีกเลี่ยงปัญหาสิทธิ์ของ Windows Temp ที่ถูกใช้ร่วมกัน ทั้งหมดถูก ignore โดย Git และแยกจาก raw/curated data จริง หากระบุ `--basetemp` เอง ระบบจะใช้ค่าที่ระบุแทน
 
 หลังสร้าง full run และ unchanged rerun ของตนเอง สามารถอัปเดต snapshot ที่ส่งตรวจได้:
 
