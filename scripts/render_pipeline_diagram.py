@@ -7,11 +7,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PALETTE = {
-    "source": ("#EAF3FF", "#719DD5", "#194E87"),
-    "process": ("#F2EEFC", "#A590CE", "#54378A"),
-    "store": ("#EAF6F2", "#6FAE9D", "#205F51"),
-    "quality": ("#FFF5DC", "#C69B42", "#725013"),
-    "failed": ("#FFF0F0", "#D78D92", "#962E38"),
+    "source": ("#FFFFFF", "#68737D", "#25313B"),
+    "process": ("#FFFFFF", "#486781", "#294A65"),
+    "store": ("#FFFFFF", "#68737D", "#25313B"),
+    "quality": ("#FFFFFF", "#486781", "#294A65"),
+    "failed": ("#FFFFFF", "#68737D", "#25313B"),
 }
 
 
@@ -28,22 +28,22 @@ class Node:
 
 
 NODES = {
-    "zoneSource": Node("source", 64, 210, 360, 165, "ข้อมูลต้นทาง / CSV", "Taxi Zone Lookup", ("รหัสและชื่อพื้นที่", "NYC TLC / 1 ไฟล์")),
-    "configSource": Node("source", 500, 210, 360, 165, "การตั้งค่า / JSON", "pipeline.json", ("ช่วงเดือน แหล่งข้อมูล", "และโฟลเดอร์ที่ใช้เก็บผล")),
-    "tripSource": Node("source", 936, 210, 360, 165, "ข้อมูลต้นทาง / PARQUET", "Trip Records", ("Taxi 4 ประเภท × 6 เดือน", "NYC TLC / 24 ไฟล์")),
-    "prepare": Node("process", 500, 425, 360, 165, "01 / 07 · PREPARE", "เตรียมรายการข้อมูล", ("อ่าน config และช่วงเดือน", "สร้างรายการไฟล์ที่จะใช้")),
-    "lookup": Node("process", 64, 655, 560, 165, "02 / 07 · LOOKUP", "ตรวจตารางพื้นที่", ("รับ/ตรวจ CSV และรหัส LocationID", "ยืนยันว่ารหัสพื้นที่ไม่ซ้ำ")),
-    "trips": Node("process", 736, 655, 560, 165, "03 / 07 · TRIPS", "ตรวจและสรุปข้อมูลเที่ยวรถ", ("ตรวจ SHA-256 คอลัมน์ และกฎเวลา", "คำนวณรายวันใหม่ หรือใช้ cache ที่ตรงกัน")),
-    "zonesStore": Node("store", 64, 885, 560, 130, "D1", "ตารางพื้นที่พร้อมเชื่อม", ("ตารางในหน่วยความจำ / 265 พื้นที่", "LocationID → ชื่อ Zone และ Borough")),
-    "aggregateStore": Node("store", 736, 885, 560, 130, "D2", "ผลสรุปและ audit รายไฟล์", ("data/cache/ — ยอดรายวันและผลตรวจ", "เก็บ raw / valid / rejected ไว้เทียบยอด")),
-    "curate": Node("process", 390, 1085, 580, 165, "04 / 07 · CURATED", "เชื่อมข้อมูลพื้นที่", ("LEFT JOIN ด้วย pickup_location_id", "เก็บเที่ยวที่ไม่มีพื้นที่เป็น Unknown")),
-    "curatedStore": Node("store", 64, 1315, 1232, 135, "D3", "Curated / ชุดข้อมูลสรุป", ("daily_zone_counts.parquet — วัน × ประเภท Taxi × พื้นที่ × ไฟล์ต้นทาง", "153,662 กลุ่ม / รวม trip_count ได้ 149,655,451 เที่ยว")),
-    "quality": Node("quality", 64, 1530, 360, 165, "05 / 07 · QUALITY", "ตรวจคุณภาพ", ("เทียบ curated กับ audit", "ต้องผ่านครบ 10 เงื่อนไข")),
-    "analysis": Node("process", 500, 1530, 360, 165, "06 / 07 · ANALYSIS", "วิเคราะห์ผล", ("รวมยอดจาก curated", "จัดอันดับและสร้างกราฟ")),
-    "publish": Node("process", 936, 1530, 360, 165, "07 / 07 · PUBLISH", "บันทึกผลสำเร็จ", ("คำนวณ content hash", "อัปเดต latest.json")),
-    "failed": Node("failed", 64, 1770, 360, 140, "FAIL / ข้อผิดพลาด", "FAILED — หยุดรอบนี้", ("เก็บ log และผลสำเร็จเดิม", "ไม่เปลี่ยน latest.json")),
-    "resultStore": Node("store", 500, 1770, 360, 140, "D4", "ผลวิเคราะห์", ("อันดับ / รายเดือน / พื้นที่", "กราฟ และ CSV ตัวอย่าง")),
-    "successStore": Node("store", 936, 1770, 360, 140, "D5", "ผลที่เผยแพร่ในเครื่อง", ("SUCCESS และ run.json", "latest.json ชี้ไปยังรอบนี้")),
+    "zoneSource": Node("source", 56, 110, 320, 108, "", "Taxi Zone Lookup", ("CSV จาก NYC TLC", "รหัสและชื่อพื้นที่")),
+    "configSource": Node("source", 480, 110, 320, 108, "", "การตั้งค่า (JSON)", ("config/pipeline.json", "เดือน แหล่งข้อมูล และโฟลเดอร์")),
+    "tripSource": Node("source", 904, 110, 320, 108, "", "Trip Records", ("Parquet จาก NYC TLC", "24 ไฟล์ จาก Taxi 4 ประเภท")),
+    "prepare": Node("process", 480, 260, 320, 112, "1", "เตรียมรายการข้อมูล", ("อ่าน config และช่วงเดือน", "สร้างรายการไฟล์ที่จะใช้")),
+    "lookup": Node("process", 56, 426, 520, 112, "2", "ตรวจตารางพื้นที่", ("รับ/ตรวจ CSV และรหัส LocationID", "ยืนยันว่ารหัสพื้นที่ไม่ซ้ำ")),
+    "trips": Node("process", 704, 426, 520, 112, "3", "ตรวจและสรุปเที่ยวรถ", ("ตรวจ SHA-256 คอลัมน์ และกฎเวลา", "สรุปรายวันใหม่ หรือใช้ cache ที่ตรงกัน")),
+    "zonesStore": Node("store", 56, 598, 520, 108, "D1", "ตารางพื้นที่ (265 รหัส)", ("ตารางชั่วคราวในหน่วยความจำ", "LocationID → Zone / Borough")),
+    "aggregateStore": Node("store", 704, 598, 520, 108, "D2", "ผลสรุปและ audit", ("data/cache/", "ยอดรายวันพร้อม raw / valid / rejected")),
+    "curate": Node("process", 360, 762, 560, 112, "4", "เชื่อมข้อมูลพื้นที่", ("LEFT JOIN ด้วย pickup_location_id", "เก็บเที่ยวที่ไม่มีพื้นที่เป็น Unknown")),
+    "curatedStore": Node("store", 56, 928, 1168, 108, "D3", "ชุดข้อมูลสรุป (Curated)", ("daily_zone_counts.parquet", "วัน × ประเภท Taxi × พื้นที่รับผู้โดยสาร × ไฟล์ต้นทาง; จำนวนเที่ยวอยู่ใน trip_count")),
+    "quality": Node("quality", 56, 1100, 320, 112, "5", "ตรวจคุณภาพ", ("เทียบ curated กับ audit", "ตรวจครบ 10 เงื่อนไข")),
+    "analysis": Node("process", 480, 1100, 320, 112, "6", "วิเคราะห์ผล", ("รวมยอดจาก curated", "จัดอันดับและสร้างกราฟ")),
+    "publish": Node("process", 904, 1100, 320, 112, "7", "บันทึกผลสำเร็จ", ("คำนวณ content hash", "อัปเดต latest.json")),
+    "failed": Node("failed", 56, 1274, 320, 108, "", "FAILED", ("บันทึกข้อผิดพลาดใน log", "คง latest.json ของรอบก่อน")),
+    "resultStore": Node("store", 480, 1274, 320, 108, "D4", "ผลวิเคราะห์", ("อันดับ / รายเดือน / พื้นที่", "กราฟ และ CSV ตัวอย่าง")),
+    "successStore": Node("store", 904, 1274, 320, 108, "D5", "ผลรันล่าสุดในเครื่อง", ("สถานะใน run.json", "latest.json ชี้รอบสำเร็จ")),
 }
 
 
@@ -60,28 +60,28 @@ class Edge:
 
 
 EDGES = [
-    Edge("configSource", "prepare", "M680 375 V425"),
-    Edge("zoneSource", "lookup", "M244 375 V655", "CSV พื้นที่", 244, 500, 170),
-    Edge("tripSource", "trips", "M1116 375 V655", "ข้อมูลเที่ยวรถ", 1116, 500, 210),
-    Edge("prepare", "lookup", "M590 590 V615 H544 V655", "URL พื้นที่", 450, 632, 160),
-    Edge("prepare", "trips", "M770 590 V615 H816 V655", "รายการ 24 ไฟล์", 965, 632, 240),
-    Edge("lookup", "zonesStore", "M344 820 V885", "lookup ผ่านตรวจ", 344, 853, 230),
-    Edge("trips", "aggregateStore", "M960 820 V885", "บันทึกผลคำนวณ", 960, 853, 260),
-    Edge("aggregateStore", "trips", "M1210 885 V820", "cache ตรงกัน", 1210, 853, 170),
-    Edge("zonesStore", "curate", "M344 1015 V1045 H525 V1085", "ชื่อพื้นที่", 421, 1046, 160),
-    Edge("aggregateStore", "curate", "M1016 1015 V1045 H835 V1085", "ยอดเที่ยวรายวัน", 939, 1046, 225),
-    Edge("aggregateStore", "quality", "M1296 950 H1326 V1490 H388 V1530", "audit: raw / valid / rejected", 1032, 1490, 370),
-    Edge("curate", "curatedStore", "M680 1250 V1315", "จำนวนเที่ยวหลัง join", 874, 1283, 280),
-    Edge("curatedStore", "quality", "M244 1450 V1530", "curated", 244, 1490, 140),
-    Edge("quality", "analysis", "M424 1612 H500", "PASS", 462, 1593, 78),
-    Edge("quality", "failed", "M244 1695 V1770", "FAIL", 244, 1733, 90, True),
-    Edge("analysis", "publish", "M860 1612 H936", "รายงาน", 898, 1593, 104),
-    Edge("analysis", "resultStore", "M680 1695 V1770", "ตาราง / กราฟ", 680, 1733, 200),
-    Edge("publish", "successStore", "M1116 1695 V1770", "SUCCESS", 1116, 1733, 150),
+    Edge("configSource", "prepare", "M640 218 V260"),
+    Edge("zoneSource", "lookup", "M216 218 V426", "CSV พื้นที่", 216, 321, 126),
+    Edge("tripSource", "trips", "M1064 218 V426", "ข้อมูลเที่ยวรถ", 1064, 321, 146),
+    Edge("prepare", "lookup", "M555 372 V399 H500 V426", "URL พื้นที่", 425, 408, 128),
+    Edge("prepare", "trips", "M725 372 V399 H780 V426", "รายการไฟล์", 860, 408, 138),
+    Edge("lookup", "zonesStore", "M316 538 V598", "lookup ผ่านตรวจ", 316, 567, 170),
+    Edge("trips", "aggregateStore", "M920 538 V598", "บันทึกผลคำนวณ", 920, 567, 178),
+    Edge("aggregateStore", "trips", "M1148 598 V538", "cache ตรงกัน", 1148, 567, 148),
+    Edge("zonesStore", "curate", "M316 706 V734 H490 V762", "ข้อมูลพื้นที่", 400, 743, 136),
+    Edge("aggregateStore", "curate", "M964 706 V734 H790 V762", "ยอดรายวัน", 885, 743, 136),
+    Edge("aggregateStore", "quality", "M1224 652 H1250 V1068 H344 V1100", "raw / valid / rejected", 1030, 1068, 254),
+    Edge("curate", "curatedStore", "M640 874 V928", "ข้อมูลหลังเชื่อมพื้นที่", 820, 901, 232),
+    Edge("curatedStore", "quality", "M216 1036 V1100", "curated", 216, 1068, 110),
+    Edge("quality", "analysis", "M376 1156 H480", "ผ่าน", 428, 1141, 74),
+    Edge("quality", "failed", "M216 1212 V1274", "ไม่ผ่าน", 216, 1243, 104, True),
+    Edge("analysis", "publish", "M800 1156 H904", "รายงาน", 852, 1141, 84),
+    Edge("analysis", "resultStore", "M640 1212 V1274", "ตาราง / กราฟ", 640, 1243, 150),
+    Edge("publish", "successStore", "M1064 1212 V1274", "สถานะรัน", 1064, 1243, 124),
 ]
 
 
-def svg_text(x, y, value, size=24, weight=400, fill="#26364B", anchor="start"):
+def svg_text(x, y, value, size=22, weight=400, fill="#25313B", anchor="start"):
     return (f'<text x="{x}" y="{y}" font-size="{size}" font-weight="{weight}" '
             f'fill="{fill}" text-anchor="{anchor}">{escape(value)}</text>')
 
@@ -91,42 +91,41 @@ def draw_node(node):
     x, y, w, h = node.x, node.y, node.width, node.height
     parts = []
     if node.kind == "store":
-        # A cylinder distinguishes stored data from processing, including in grayscale.
-        parts.append(f'<path d="M{x} {y+14} A{w/2} 14 0 0 1 {x+w} {y+14} V{y+h-14} A{w/2} 14 0 0 1 {x} {y+h-14} Z" fill="{fill}" stroke="{stroke}" stroke-width="2"/>')
-        parts.append(f'<path d="M{x} {y+14} A{w/2} 14 0 0 0 {x+w} {y+14}" fill="none" stroke="{stroke}" stroke-width="2"/>')
-        parts.append(svg_text(x + 25, y + 49, node.tag + " | " + node.title, 26, 700, accent))
+        # Open-ended data store: identifier compartment and two horizontal rules.
+        parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{fill}"/>')
+        parts.append(f'<path d="M{x+w} {y} H{x} V{y+h} H{x+w} M{x+44} {y} V{y+h}" fill="none" stroke="{stroke}" stroke-width="1.5"/>')
+        parts.append(svg_text(x + 22, y + 30, node.tag, 20, 600, accent, "middle"))
+        parts.append(svg_text(x + 60, y + 32, node.title, 22, 600, accent))
         for i, line in enumerate(node.lines):
-            parts.append(svg_text(x + 25, y + 84 + i * 33, line))
+            parts.append(svg_text(x + 60, y + 65 + i * 29, line, 21))
     else:
-        radius = 4 if node.kind == "source" else 18
-        parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{radius}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>')
-        compact = node.kind == "failed"
-        parts.append(svg_text(x + 24, y + 29, node.tag, 19, 700, accent))
-        parts.append(svg_text(x + 24, y + (64 if compact else 70), node.title, 26 if compact else 29, 700, accent))
+        is_process = node.kind in ("process", "quality")
+        radius = 3 if is_process else 0
+        dash = ' stroke-dasharray="5 4"' if node.kind == "failed" else ""
+        parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{radius}" fill="{fill}" stroke="{stroke}" stroke-width="1.5"{dash}/>')
+        if is_process:
+            parts.append(f'<rect x="{x+1}" y="{y+1}" width="{w-2}" height="39" fill="#EEF2F6"/>')
+            parts.append(f'<path d="M{x} {y+41} H{x+w}" stroke="#BDC9D3" stroke-width="1"/>')
+        heading = node.tag + ". " + node.title if node.tag else node.title
+        parts.append(svg_text(x + 16, y + 32, heading, 23, 600, accent))
         for i, line in enumerate(node.lines):
-            parts.append(svg_text(x + 24, y + (96 if compact else 109) + i * (32 if compact else 34), line, 23 if compact else 24))
+            parts.append(svg_text(x + 16, y + (69 if is_process else 65) + i * 29, line))
     return "\n".join(parts)
 
 
 def render_svg():
-    parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="2010" viewBox="0 0 1360 2010" role="img" aria-labelledby="diagramTitle diagramDescription">',
+    parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1450" viewBox="0 0 1280 1450" role="img" aria-labelledby="diagramTitle diagramDescription">',
              '<title id="diagramTitle">NYC Taxi — Data Flow Diagram</title>',
-             '<desc id="diagramDescription">ข้อมูลเที่ยวรถ Parquet และตารางพื้นที่ CSV ผ่านการตรวจและสรุปก่อน LEFT JOIN โดยเก็บพื้นที่ Unknown ผล curated และ audit ใช้ตรวจคุณภาพ จากนั้นสร้างผลวิเคราะห์และบันทึก SUCCESS หากผิดพลาดจะบันทึก FAILED และรักษาผลสำเร็จเดิม หมายเลข 01 ถึง 07 ตรงกับขั้นตอนใน log</desc>',
-             '<style>text { font-family: Tahoma, "Leelawadee UI", "Noto Sans Thai", sans-serif; }</style>',
-             '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9 Z" fill="#52657D"/></marker><marker id="errorArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9 Z" fill="#AC4451"/></marker></defs>',
-             '<rect width="1360" height="2010" fill="#FFFFFF"/>',
-             svg_text(64, 48, "CS341 / SUBMISSION 2 / H1 2024", 20, 700, "#62738A"),
-             svg_text(64, 101, "NYC Taxi — Data Flow Diagram", 43, 700, "#14243A"),
-             svg_text(64, 142, "หมายเลข 01–07 ตรงกับ log · ลูกศรแสดงข้อมูลที่ส่งต่อระหว่างส่วน", 25, 400, "#526278")]
-    for x, kind, label in [(64, "source", "ข้อมูลต้นทาง"), (319, "process", "ประมวลผล"), (565, "store", "ข้อมูลที่จัดเก็บ"), (855, "quality", "ตรวจคุณภาพ"), (1120, "failed", "ข้อผิดพลาด")]:
-        fill, stroke, accent = PALETTE[kind]
-        parts.append(f'<rect x="{x}" y="169" width="19" height="19" rx="3" fill="{fill}" stroke="{stroke}" stroke-width="2"/>')
-        parts.append(svg_text(x + 29, 186, label, 22, 400, accent))
+             '<desc id="diagramDescription">ข้อมูลเที่ยวรถ Parquet และตารางพื้นที่ CSV ผ่านการตรวจและสรุปก่อน LEFT JOIN โดยเก็บพื้นที่ Unknown ผล curated และ audit ใช้ตรวจคุณภาพ จากนั้นสร้างผลวิเคราะห์และบันทึก SUCCESS หากผิดพลาดจะบันทึก FAILED และรักษาผลสำเร็จเดิม หมายเลข 1 ถึง 7 ตรงกับขั้นตอนใน log</desc>',
+             '<style>text { font-family: "Leelawadee UI", Tahoma, "Noto Sans Thai", sans-serif; }</style>',
+             '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9 Z" fill="#58636E"/></marker></defs>',
+             '<rect width="1280" height="1450" fill="#FFFFFF"/>',
+             svg_text(56, 41, "NYC Taxi: Data Flow Diagram", 29, 600),
+             svg_text(56, 75, "มกราคม–มิถุนายน 2024  กระบวนการ 1–7 ตรงกับลำดับใน log", 20, 400, "#56616B")]
     # Edges are painted before nodes/labels so arrow routes cannot obscure text.
     for edge in EDGES:
-        stroke, marker = ("#AC4451", "errorArrow") if edge.failed else ("#52657D", "arrow")
-        dash = ' stroke-dasharray="8 6"' if edge.failed else ""
-        parts.append(f'<path d="{edge.path}" fill="none" stroke="{stroke}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#{marker})"{dash}/>')
+        dash = ' stroke-dasharray="5 4"' if edge.failed else ""
+        parts.append(f'<path d="{edge.path}" fill="none" stroke="#58636E" stroke-width="1.8" stroke-linejoin="miter" marker-end="url(#arrow)"{dash}/>')
     for node_id, node in NODES.items():
         parts.append(f'<g id="{node_id}" data-bounds="{node.x},{node.y},{node.width},{node.height}">')
         parts.append(draw_node(node))
@@ -134,12 +133,10 @@ def render_svg():
     for edge in EDGES:
         if not edge.label:
             continue
-        parts.append(f'<rect x="{edge.label_x-edge.label_width/2}" y="{edge.label_y-17}" width="{edge.label_width}" height="31" rx="7" fill="#FFFFFF"/>')
-        parts.append(svg_text(edge.label_x, edge.label_y + 6, edge.label, 21, 700 if edge.label in ("PASS", "FAIL") else 400,
-                              "#962E38" if edge.failed else "#34465E", "middle"))
+        parts.append(f'<rect x="{edge.label_x-edge.label_width/2}" y="{edge.label_y-13}" width="{edge.label_width}" height="26" fill="#FFFFFF"/>')
+        parts.append(svg_text(edge.label_x, edge.label_y + 6, edge.label, 19, 400, "#3E4B57", "middle"))
     parts.extend([
-        svg_text(64, 1952, "หากขั้นใดผิดพลาด: บันทึก FAILED และคงผลสำเร็จก่อนหน้าไว้", 23, 700, "#962E38"),
-        svg_text(64, 1988, "ส่งหลักฐานขึ้น GitHub แยกภายหลัง: export_evidence.py → ตรวจ PASS → commit / push", 22, 400, "#526278"),
+        svg_text(56, 1428, "หากขั้นอื่นเกิดข้อผิดพลาด ระบบจะบันทึก FAILED และคงผลสำเร็จรอบก่อนเช่นกัน", 20, 400, "#56616B"),
         "</svg>"])
     return "\n".join(parts) + "\n"
 
@@ -150,7 +147,8 @@ def render_mermaid():
              '    %% Colors and labels match docs/images/pipeline-data-flow.svg.',
              '    %% Numbered processes refer to log stages; arrows carry data, not parallel execution.']
     for node_id, node in NODES.items():
-        label = "\n".join((node.tag + " — " + node.title, *node.lines))
+        heading = node.tag + (". " if node.kind in ("process", "quality") else " ") + node.title if node.tag else node.title
+        label = "\n".join((heading, *node.lines))
         shape = f'[("{label}")]' if node.kind == "store" else f'("{label}")' if node.kind in ("process", "quality") else f'["{label}"]'
         lines.append(f'    {node_id}{shape}:::{node.kind}')
     for edge in EDGES:
